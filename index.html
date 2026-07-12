@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<title>Formagge · Mi Premio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<style>
+:root{
+  --cream:#F7F5F0; --panel:#FBFAF6; --panel2:#F2EFE7;
+  --line:#ECE7DC; --line2:#D8D2C4;
+  --ink:#1F2421; --stone:#6B6B63; --stone2:#8C887E;
+  --olive:#5A6650; --olive-soft:#8A9B7E; --olive-bg:#EEF4EC;
+  --gold:#B08D57; --gold-soft:#C9B896; --gold-bg:#FBF7ED;
+  --wine:#7A4A52; --wine-bg:#F9EDEE; --wine-line:#E4C9CE;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--cream)}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+  color:var(--ink); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  min-height:100vh; display:flex; justify-content:center;
+}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.shell{
+  width:100%; max-width:440px; min-height:100vh;
+  background:var(--panel); display:flex; flex-direction:column;
+}
+@media (min-width:520px){
+  body{padding:28px 0}
+  .shell{min-height:calc(100vh - 56px); border-radius:16px; border:1px solid var(--line);
+    box-shadow:0 2px 4px rgba(31,36,33,.04), 0 24px 48px -24px rgba(31,36,33,.18);}
+}
+.hidden{display:none !important}
+header.top{padding:26px 24px 18px; border-bottom:1px solid var(--line)}
+.brand{display:flex; align-items:baseline; justify-content:space-between}
+.brand .word{font-family:Georgia,serif; font-weight:700; font-size:20px; letter-spacing:.04em}
+.brand .word .q{color:var(--gold)}
+.brand .tag{font-size:10.5px; color:var(--stone); text-transform:uppercase; letter-spacing:.09em}
+.rule{height:2px; margin-top:14px;
+  background:linear-gradient(90deg,transparent,var(--gold) 15%,var(--gold) 85%,transparent); opacity:.5}
+main{flex:1; padding:28px 24px 36px; display:flex; flex-direction:column}
+.page-title{font-family:Georgia,serif; font-size:24px; font-weight:700; margin:0 0 4px; text-wrap:balance}
+.page-hint{color:var(--stone); font-size:13px; margin:0 0 26px; line-height:1.6}
+label.fl{display:block; color:var(--stone); font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:600; margin-bottom:8px}
+select, input[type=text], input[type=file]{
+  width:100%; background:#fff; border:1px solid var(--line2); color:var(--ink);
+  padding:12px 14px; border-radius:9px; font-size:15px; font-family:inherit;
+}
+select:focus, input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-bg)}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--olive); color:#fff; border:none; padding:13px 20px; border-radius:9px;
+  font-weight:600; font-size:14.5px; cursor:pointer; font-family:inherit; width:100%;
+}
+.btn:hover{background:#4b5743}
+.btn:disabled{background:var(--line2); color:var(--stone2); cursor:not-allowed}
+.btn.ghost{background:transparent; color:var(--olive); border:1px solid var(--olive-soft)}
+.btn.ghost:hover{background:var(--olive-bg)}
+.spacer{flex:1}
+.foot-link{
+  text-align:center; margin-top:28px; font-size:12px; color:var(--stone2);
+  text-decoration:underline; cursor:pointer; background:none; border:none; font-family:inherit;
+}
+.foot-link:hover{color:var(--stone)}
+.empty{
+  background:var(--panel2); border:1px solid var(--line); border-radius:12px;
+  padding:20px; font-size:13px; color:var(--stone); line-height:1.7;
+}
+/* result screen */
+.vendor-row{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px}
+.vendor-name{font-family:Georgia,serif; font-size:22px; font-weight:700}
+.vendor-canal{font-size:11px; color:var(--stone); text-transform:uppercase; letter-spacing:.06em}
+.period{color:var(--stone); font-size:12.5px; margin-bottom:22px}
+.gauge-wrap{display:flex; flex-direction:column; align-items:center; margin:6px 0 8px}
+.gauge-num{
+  font-family:Georgia,serif; font-weight:700; font-size:52px; margin-top:-58px;
+  font-variant-numeric:tabular-nums; letter-spacing:-1px;
+}
+.gauge-state{
+  display:inline-flex; align-items:center; gap:7px; padding:6px 16px; border-radius:20px;
+  font-weight:600; font-size:12.5px; margin-top:4px;
+}
+.dot{width:8px; height:8px; border-radius:50%}
+.breakdown{margin-top:30px; display:flex; flex-direction:column; gap:12px}
+.metric-card{background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:16px 18px}
+.metric-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+.metric-title{font-weight:600; font-size:13.5px}
+.metric-weight{
+  font-size:10.5px; font-weight:700; color:var(--stone); background:#fff;
+  border:1px solid var(--line2); padding:2px 9px; border-radius:20px; letter-spacing:.03em;
+}
+.metric-values{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:9px}
+.metric-real{font-size:19px; font-weight:700; font-variant-numeric:tabular-nums}
+.metric-target{font-size:12.5px; color:var(--stone)}
+.metric-pct{font-size:19px; font-weight:700; font-variant-numeric:tabular-nums}
+.bar-track{height:7px; background:var(--line2); border-radius:5px; overflow:hidden}
+.bar-fill{height:100%; border-radius:5px}
+.note{font-size:12px; color:var(--stone2); margin-top:22px; line-height:1.6; text-align:center}
+.money-card{background:var(--olive-bg); border:1px solid var(--olive-soft); border-radius:12px; padding:18px 20px; text-align:center; margin:4px 0 26px}
+.money-label{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--olive); font-weight:600}
+.money-value{font-family:Georgia,serif; font-size:34px; font-weight:700; margin:5px 0 7px; color:var(--ink); font-variant-numeric:tabular-nums}
+.money-sub{font-size:12px; color:var(--stone)}
+.money-sub b{color:var(--ink); font-weight:600}
+.pin-error{color:var(--wine); font-size:12px; margin:-10px 0 16px}
+/* admin */
+.field{margin-bottom:18px}
+.drop{
+  display:block; border:1.5px dashed var(--line2); border-radius:12px; padding:26px 18px; text-align:center;
+  color:var(--stone); font-size:13px; background:var(--panel2); cursor:pointer;
+}
+.drop:hover{border-color:var(--gold-soft)}
+.status{border-radius:10px; padding:13px 15px; font-size:13px; margin-top:16px; line-height:1.6}
+.status.ok{background:var(--olive-bg); color:var(--olive); border:1px solid var(--olive-soft)}
+.status.err{background:var(--wine-bg); color:var(--wine); border:1px solid var(--wine-line)}
+.status.info{background:var(--gold-bg); color:#8C6A1A; border:1px solid var(--gold-soft)}
+table.prev{width:100%; border-collapse:collapse; font-size:12px; margin-top:16px}
+table.prev th{
+  text-align:left; color:var(--stone); font-size:10px; text-transform:uppercase; letter-spacing:.05em;
+  border-bottom:1px solid var(--line); padding:6px 6px; font-weight:600;
+}
+table.prev td{padding:7px 6px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums}
+table.prev td.name{font-variant-numeric:normal}
+.sem-dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px}
+.admin-section{margin-bottom:26px; padding-bottom:24px; border-bottom:1px solid var(--line)}
+.admin-section:last-of-type{border-bottom:none; padding-bottom:0; margin-bottom:8px}
+.admin-section-title{font-weight:600; font-size:14.5px; margin-bottom:3px}
+.admin-section-sub{color:var(--stone); font-weight:400; font-size:12px; margin-left:6px}
+.admin-section-hint{font-size:12px; color:var(--stone); margin:0 0 12px; line-height:1.55}
+.admin-meta{font-size:11.5px; color:var(--stone2); margin-top:9px; line-height:1.5}
+.warn-list{font-size:12px; color:#8C6A1A; background:var(--gold-bg); border:1px solid var(--gold-soft); border-radius:9px; padding:10px 13px; margin-top:12px; line-height:1.6}
+.export-box{background:var(--olive-bg); border:1px solid var(--olive-soft); border-radius:12px; padding:16px 18px}
+.export-box ol{margin:10px 0 0; padding-left:20px; font-size:12.5px; color:var(--olive); line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="top">
+    <div class="brand">
+      <div class="word">FORMAGGE<span class="q">·</span></div>
+      <div class="tag">Plan de comisiones</div>
+    </div>
+    <div class="rule"></div>
+  </header>
+
+  <main>
+    <section id="view-login" class="hidden">
+      <h1 class="page-title">Mi premio del mes</h1>
+      <p class="page-hint" id="login-hint">Elegí tu nombre para ver tu avance de Julio 2026.</p>
+
+      <div id="login-empty" class="empty hidden">
+        Todavía no se cargaron los datos de este período. Pedile a Control de Gestión que actualice el archivo.
+      </div>
+
+      <div id="login-form" class="">
+        <div class="field">
+          <label class="fl" for="vendor-select">Vendedor</label>
+          <select id="vendor-select"><option value="Agustin Balate">Agustin Balate</option><option value="Daniel Masulli">Daniel Masulli</option><option value="Distribuidores">Distribuidores</option><option value="Emiliano Montes">Emiliano Montes</option><option value="Ignacio Sancho">Ignacio Sancho</option><option value="Ivo Lattuada">Ivo Lattuada</option><option value="Javier Ochoteco">Javier Ochoteco</option><option value="Juan Tammaro">Juan Tammaro</option><option value="Manuela Pesaresi">Manuela Pesaresi</option><option value="Martin Fernandez">Martin Fernandez</option><option value="Rodrigo Barria">Rodrigo Barria</option></select>
+        </div>
+        <div class="field">
+          <label class="fl" for="pin-input">PIN</label>
+          <input type="text" inputmode="numeric" maxlength="4" id="pin-input" placeholder="4 dígitos">
+        </div>
+        <div class="pin-error hidden" id="pin-error">PIN incorrecto. Volvé a intentar.</div>
+        <button class="btn" id="btn-ingresar">Ingresar</button>
+      </div>
+
+      <div class="spacer"></div>
+      <button class="foot-link" id="link-admin">Actualizar datos (Control de Gestión)</button>
+    </section>
+
+    <section id="view-result" class="hidden">
+      <div class="vendor-row">
+        <div class="vendor-name" id="res-name">Manuela Pesaresi</div>
+        <div class="vendor-canal" id="res-canal">Gastronomia</div>
+      </div>
+      <div class="period" id="res-period">Período: Julio 2026</div>
+
+      <div class="gauge-wrap">
+        <svg id="gauge-svg" viewBox="0 0 320 176" width="100%" style="max-width:320px">
+          <path id="gauge-track" fill="none" stroke-linecap="round" d="M 32 159.99999999999997 A 128 128 0 0 1 288 160" stroke="var(--line2)" stroke-width="20"></path>
+          <path id="gauge-tick100" fill="none" d="M 217 61.273103968574006 L 231 37.02439266260971" stroke="var(--stone2)" stroke-width="2"></path>
+          <path id="gauge-value" fill="none" stroke-linecap="round" d="" stroke="var(--wine)" stroke-width="20"></path>
+        </svg>
+        <div class="gauge-num" id="gauge-num" style="color: var(--wine);">0%</div>
+        <div class="gauge-state" id="gauge-state" style="background: var(--wine-bg); color: var(--wine);"><span class="dot" style="background: var(--wine);"></span><span id="gauge-state-label">No llegó al mínimo para cobrar</span></div>
+      </div>
+
+      <div class="money-card">
+        <div class="money-label">Premio a pagar</div>
+        <div class="money-value" id="premio-pagar">$0</div>
+        <div class="money-sub">Objetivo <b id="premio-objetivo">$736.000</b> · Máximo <b id="premio-maximo">$1.104.000</b></div>
+      </div>
+
+      <div class="breakdown">
+        <div class="metric-card">
+          <div class="metric-head">
+            <div class="metric-title">Cumplimiento de kilos</div>
+            <div class="metric-weight" id="kg-weight">peso 30%</div>
+          </div>
+          <div class="metric-values">
+            <div><span class="metric-real" id="kg-real">2.889</span> <span class="metric-target">de <span id="kg-target">16.000</span> kg</span></div>
+            <div class="metric-pct" id="kg-pct">18,1%</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="kg-bar" style="background: var(--wine); width: 18.0571%;"></div></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-head">
+            <div class="metric-title">Cumplimiento de margen</div>
+            <div class="metric-weight" id="mg-weight">peso 70%</div>
+          </div>
+          <div class="metric-values">
+            <div><span class="metric-real" id="mg-real">24,5%</span> <span class="metric-target">de <span id="mg-target">24,3%</span></span></div>
+            <div class="metric-pct" id="mg-pct">100,9%</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="mg-bar" style="background: var(--olive); width: 100%;"></div></div>
+        </div>
+      </div>
+
+      <p class="note" id="formula-note">Premio final = cumpl. kilos × 30% + cumpl. margen × 70% · tope 150% · mínimo 80% para cobrar</p>
+
+      <div class="spacer"></div>
+      <button class="btn ghost" id="btn-volver">Volver</button>
+    </section>
+
+    <section id="view-admin" class="">
+      <h1 class="page-title">Actualizar datos</h1>
+      <p class="page-hint">Cargá los archivos, revisá la vista previa y al final descargá la página actualizada para subirla a GitHub. Todo pasa en tu navegador, nada se sube solo.</p>
+
+      <div class="field">
+        <label class="fl" for="period-input">Período</label>
+        <input type="text" id="period-input" placeholder="Ej: Julio 2026">
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">1. Objetivos del mes<span class="admin-section-sub">Julio 2026 Comisiones.xlsx</span></div>
+        <p class="admin-section-hint">Hoja "Cálculo Premio": Vendedor, Canal, Kg Target, MG Target, Objetivo $, Premio Máximo.</p>
+        <label class="drop" id="drop-zone-targets" for="file-input-targets">
+          <div id="drop-label-targets">Julio 2026 Comisiones.xlsx</div>
+          <input type="file" id="file-input-targets" accept=".xlsx,.csv" style="display:none">
+        </label>
+        <div id="targets-status"></div>
+        <div id="targets-preview-wrap"></div>
+        <button class="btn" id="btn-publicar-targets" style="margin-top:14px" disabled="">Guardar objetivos</button>
+        <div class="admin-meta" id="targets-meta">Última carga: 12/7/2026 06:35 p. m.</div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">2. Avance real<span class="admin-section-sub">Reporte MACO x Cliente</span></div>
+        <p class="admin-section-hint">Hoja "Base": suma Kg y margen neto por vendedor (excluye remitos, muestras y precio ≤ 1).</p>
+        <label class="drop" id="drop-zone-reales" for="file-input-reales">
+          <div id="drop-label-reales">Reporte MACO x CLIENTE 072026.xlsx</div>
+          <input type="file" id="file-input-reales" accept=".xlsx,.csv" style="display:none">
+        </label>
+        <div id="reales-status"><div class="status ok">14 vendedores con ventas. 1019 líneas válidas de 1019 (excluidas: 0 remitos, 0 muestras/ecommerce, 0 precio ≤ 1).</div></div>
+        <div id="reales-preview-wrap"><table class="prev"><thead><tr><th>Vendedor</th><th>Kg real</th><th>MG real</th></tr></thead><tbody><tr><td class="name">Agustin Balate</td><td>162</td><td>38,2%</td></tr><tr><td class="name">Bajas Gastro</td><td>54</td><td>32,2%</td></tr><tr><td class="name">Daniel Masulli</td><td>1.923</td><td>33,1%</td></tr><tr><td class="name">Distribuidores</td><td>758</td><td>24,1%</td></tr><tr><td class="name">Emiliano Montes</td><td>1.447</td><td>23,4%</td></tr><tr><td class="name">Ignacio Sancho</td><td>3.671</td><td>20,7%</td></tr><tr><td class="name">Ivo Lattuada</td><td>1.545</td><td>30%</td></tr><tr><td class="name">Javier Ochoteco</td><td>590</td><td>39,9%</td></tr><tr><td class="name">Juan Tammaro</td><td>662</td><td>25%</td></tr><tr><td class="name">Manuela Pesaresi</td><td>2.889</td><td>24,5%</td></tr><tr><td class="name">Martin Fernandez</td><td>299</td><td>26,5%</td></tr><tr><td class="name">Oficina</td><td>16</td><td>19,7%</td></tr><tr><td class="name">Rodrigo Barria</td><td>847</td><td>31,8%</td></tr><tr><td class="name">Web</td><td>11</td><td>55%</td></tr></tbody></table></div>
+        <div id="reales-warn"></div>
+        <button class="btn" id="btn-publicar-reales" style="margin-top:14px">Guardar avance real</button>
+        <div class="admin-meta" id="reales-meta">Última carga: 12/7/2026 06:36 p. m.</div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-title">3. Publicar</div>
+        <div class="export-box">
+          Cuando tengas los objetivos y/o el avance real cargados arriba, descargá la página con los datos incluidos y subila a GitHub.
+          <ol>
+            <li>Tocá "Descargar página actualizada".</li>
+            <li>Entrá a tu repositorio en GitHub.</li>
+            <li>Arrastrá el archivo descargado (se llama <code>index.html</code>) para reemplazar el que ya está.</li>
+            <li>Esperá ~1 minuto y el link público ya muestra los datos nuevos.</li>
+          </ol>
+        </div>
+        <button class="btn" id="btn-exportar" style="margin-top:14px">Descargar página actualizada</button>
+        <div id="export-status"></div>
+      </div>
+
+      <div class="spacer"></div>
+      <button class="foot-link" id="link-login">Volver al login</button>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var STORE_KEY = "premios_formagge_v1";
+/*__BAKED_STATE__*/var BAKED_STATE = {"period":"Julio 2026","targets":{"Ignacio Sancho":{"canal":"Mayoristas","kgTarget":11100,"mgTarget":0.21,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"7362"},"Manuela Pesaresi":{"canal":"Gastronomia","kgTarget":16000,"mgTarget":0.243,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"3693"},"Ivo Lattuada":{"canal":"Gastronomia","kgTarget":11700,"mgTarget":0.253,"objetivoPremio":646752,"premioMaximo":970128,"pin":"5708"},"Rodrigo Barria":{"canal":"Gastronomia","kgTarget":5000,"mgTarget":0.306,"objetivoPremio":368000,"premioMaximo":552000,"pin":"6977"},"Daniel Masulli":{"canal":"Gastronomia","kgTarget":7300,"mgTarget":0.329,"objetivoPremio":646752,"premioMaximo":970128,"pin":"6114"},"Javier Ochoteco":{"canal":"Tradicional","kgTarget":5600,"mgTarget":0.343,"objetivoPremio":800000,"premioMaximo":1200000,"pin":"6593"},"Juan Tammaro":{"canal":"Tradicional","kgTarget":1000,"mgTarget":0.34,"objetivoPremio":552000,"premioMaximo":828000,"pin":"1993"},"Agustin Balate":{"canal":"Tradicional","kgTarget":2400,"mgTarget":0.374,"objetivoPremio":320000,"premioMaximo":480000,"pin":"2672"},"Martin Fernandez":{"canal":"Supermercado","kgTarget":3500,"mgTarget":0.271,"objetivoPremio":240000,"premioMaximo":360000,"pin":"2524"},"Emiliano Montes":{"canal":"Supermercado","kgTarget":10800,"mgTarget":0.3,"objetivoPremio":0,"premioMaximo":0,"pin":"6994"},"Distribuidores":{"canal":"Distribuidores","kgTarget":2000,"mgTarget":0.278,"objetivoPremio":0,"premioMaximo":0,"pin":"2188"}},"config":{"pesoKg":0.3,"pesoMg":0.7,"umbral":0.8},"reales":{"Agustin Balate":{"kgReal":161.7,"mgReal":0.38225610892149525},"Juan Tammaro":{"kgReal":662.12,"mgReal":0.25009838614912216},"Daniel Masulli":{"kgReal":1923.4299999999994,"mgReal":0.33106098980611126},"Ivo Lattuada":{"kgReal":1545.4300000000005,"mgReal":0.2997369540019792},"Bajas Gastro":{"kgReal":53.599999999999994,"mgReal":0.32176721136360514},"Manuela Pesaresi":{"kgReal":2889.1400000000003,"mgReal":0.24512058856549535},"Emiliano Montes":{"kgReal":1447.1000000000022,"mgReal":0.23370395557693124},"Ignacio Sancho":{"kgReal":3671.42,"mgReal":0.20665774311958687},"Javier Ochoteco":{"kgReal":590.2800000000002,"mgReal":0.3986512909450293},"Rodrigo Barria":{"kgReal":847.0100000000002,"mgReal":0.31773583856259036},"Martin Fernandez":{"kgReal":298.58000000000004,"mgReal":0.264978665513506},"Web":{"kgReal":11.2,"mgReal":0.5503041597287786},"Distribuidores":{"kgReal":758.2499999999997,"mgReal":0.24119553462644103},"Oficina":{"kgReal":16.21,"mgReal":0.19652595324842803}},"updatedAtTargets":"2026-07-12T23:18:03.749Z","updatedAtReal":"2026-07-12T23:18:03.749Z"};/*__END_BAKED_STATE__*/
+var STATE = BAKED_STATE || { period:"", targets:{}, reales:{}, config:{ pesoKg:0.30, pesoMg:0.70, umbral:0 }, updatedAtTargets:null, updatedAtReal:null };
+STATE.config = STATE.config || { pesoKg:0.30, pesoMg:0.70, umbral:0 };
+var pendingTargets = null;
+var pendingReales = null;
+
+var TIPO_EXCL = ["remito"];
+var CATEGORIA_EXCL = ["muestras", "ecommerce"];
+var PRECIO_MIN = 1;
+
+function hasStorage(){ return typeof window.storage !== "undefined" && window.storage && typeof window.storage.get === "function"; }
+
+function stripAccents(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function normHeader(s){ return stripAccents(String(s||"")).toLowerCase().replace(/[\r\n]+/g," ").replace(/\s+/g," ").trim(); }
+
+function parseEsNumber(raw){
+  if (typeof raw === "number") return raw;
+  var s = String(raw||"").trim();
+  if (!s) return 0;
+  var isPct = /%/.test(s);
+  s = s.replace(/%/g,"").replace(/\$/g,"").trim();
+  var hasComma = s.indexOf(",") !== -1;
+  var hasDot = s.indexOf(".") !== -1;
+  if (hasComma && hasDot){
+    s = s.replace(/\./g,"").replace(",", ".");
+  } else if (hasComma){
+    s = s.replace(",", ".");
+  } else if (hasDot){
+    var parts = s.split(".");
+    var looksThousands = parts.length > 1 && parts.slice(1).every(function(p){ return p.length === 3; });
+    if (looksThousands) s = parts.join("");
+  }
+  var n = parseFloat(s);
+  if (isNaN(n)) return 0;
+  if (isPct) n = n/100;
+  return n;
+}
+function parseEsPercentValue(raw){
+  if (typeof raw === "number") return raw > 3 ? raw/100 : raw;
+  return parseEsNumber(raw);
+}
+
+// ---- CSV ----
+function parseCsv(text){
+  var delim = (text.slice(0,2000).split(";").length > text.slice(0,2000).split(",").length) ? ";" : ",";
+  var rows = []; var row = []; var field = ""; var inQuotes = false;
+  for (var i=0; i<text.length; i++){
+    var c = text[i];
+    if (inQuotes){
+      if (c === '"'){ if (text[i+1] === '"'){ field += '"'; i++; } else { inQuotes = false; } }
+      else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === delim){ row.push(field); field=""; }
+      else if (c === "\n"){ row.push(field); field=""; rows.push(row); row=[]; }
+      else if (c === "\r"){ /* skip */ }
+      else field += c;
+    }
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(function(r){ return r.some(function(v){ return String(v).trim() !== ""; }); });
+}
+
+// ---- Minimal XLSX reader (ZIP, entries decompressed lazily; sheet XML via regex, no DOMParser) ----
+// Real workbooks carry huge pivot caches and inflated "used ranges" on unrelated sheets
+// (seen: a Base sheet with a 122MB uncompressed XML). Decompressing every zip entry and
+// building a full DOM tree for each sheet froze the tab, so this only inflates what it
+// reads (workbook entries + the one worksheet that matches), and scans that XML with
+// regex instead of DOMParser.
+function readU32(buf, off){ return buf[off] | (buf[off+1]<<8) | (buf[off+2]<<16) | (buf[off+3]<<24*1) >>> 0; }
+function readU16(buf, off){ return buf[off] | (buf[off+1]<<8); }
+
+async function inflateRaw(bytes){
+  if (typeof DecompressionStream === "undefined") throw new Error("nodec");
+  var ds = new DecompressionStream("deflate-raw");
+  var stream = new Blob([bytes]).stream().pipeThrough(ds);
+  var buf = await new Response(stream).arrayBuffer();
+  return new Uint8Array(buf);
+}
+
+function readCentralDirectory(bytes){
+  var eocdSig = 0x06054b50;
+  var pos = -1;
+  for (var i = bytes.length - 22; i >= Math.max(0, bytes.length - 22 - 65557); i--){
+    if (readU32(bytes, i) === eocdSig){ pos = i; break; }
+  }
+  if (pos < 0) throw new Error("noeocd");
+  var entryCount = readU16(bytes, pos+10);
+  var cdOffset = readU32(bytes, pos+16);
+  var files = {};
+  var off = cdOffset;
+  for (var e=0; e<entryCount; e++){
+    if (readU32(bytes, off) !== 0x02014b50) break;
+    var method = readU16(bytes, off+10);
+    var compSize = readU32(bytes, off+20);
+    var nameLen = readU16(bytes, off+28);
+    var extraLen = readU16(bytes, off+30);
+    var commentLen = readU16(bytes, off+32);
+    var lho = readU32(bytes, off+42);
+    var name = new TextDecoder("utf-8").decode(bytes.subarray(off+46, off+46+nameLen));
+    files[name] = { method: method, compSize: compSize, localOffset: lho };
+    off += 46 + nameLen + extraLen + commentLen;
+  }
+  return files;
+}
+
+async function readZipEntry(bytes, entry){
+  var lNameLen = readU16(bytes, entry.localOffset+26);
+  var lExtraLen = readU16(bytes, entry.localOffset+28);
+  var dataStart = entry.localOffset + 30 + lNameLen + lExtraLen;
+  var comp = bytes.subarray(dataStart, dataStart + entry.compSize);
+  return entry.method === 0 ? comp : await inflateRaw(comp);
+}
+
+function textOf(bytes){ return new TextDecoder("utf-8").decode(bytes); }
+function decodeXmlEntities(s){
+  return s.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,"&");
+}
+
+function colLettersToIndex(letters){
+  var n = 0;
+  for (var i=0; i<letters.length; i++) n = n*26 + (letters.charCodeAt(i) - 64);
+  return n - 1;
+}
+
+function parseSharedStringsFast(xml){
+  var strings = [];
+  var siRe = /<si\b[^>]*>([\s\S]*?)<\/si>/g;
+  var tRe = /<t\b[^>]*>([\s\S]*?)<\/t>/g;
+  var m;
+  while ((m = siRe.exec(xml))){
+    var text = "", tm;
+    tRe.lastIndex = 0;
+    while ((tm = tRe.exec(m[1]))) text += decodeXmlEntities(tm[1]);
+    strings.push(text);
+  }
+  return strings;
+}
+
+function parseSheetTextToGrid(xml, sharedStrings){
+  var grid = [];
+  var rowRe = /<row\b[^>]*\br="(\d+)"[^>]*>([\s\S]*?)<\/row>/g;
+  var cellRe = /<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g;
+  var refRe = /\br="([A-Z]+)\d+"/;
+  var typeRe = /\bt="([a-zA-Z]+)"/;
+  var vRe = /<v>([\s\S]*?)<\/v>/;
+  var tRe = /<t\b[^>]*>([\s\S]*?)<\/t>/;
+  var rowM;
+  while ((rowM = rowRe.exec(xml))){
+    var rowIdx = parseInt(rowM[1], 10) - 1;
+    var rowArr = grid[rowIdx] || [];
+    cellRe.lastIndex = 0;
+    var cellM;
+    while ((cellM = cellRe.exec(rowM[2]))){
+      var attrs = cellM[1], inner = cellM[2];
+      var refM = refRe.exec(attrs);
+      if (!refM) continue;
+      var colIdx = colLettersToIndex(refM[1]);
+      var typeM = typeRe.exec(attrs);
+      var type = typeM ? typeM[1] : null;
+      var val = "";
+      if (inner !== undefined){
+        if (type === "s"){
+          var vM = vRe.exec(inner);
+          var idx = vM ? parseInt(vM[1], 10) : -1;
+          val = sharedStrings[idx] || "";
+        } else if (type === "inlineStr"){
+          var tM = tRe.exec(inner);
+          val = tM ? decodeXmlEntities(tM[1]) : "";
+        } else if (type === "str" || type === "b" || type === "e"){
+          var vM2 = vRe.exec(inner);
+          val = vM2 ? decodeXmlEntities(vM2[1]) : "";
+        } else {
+          var vM3 = vRe.exec(inner);
+          val = vM3 ? parseFloat(vM3[1]) : "";
+        }
+      }
+      rowArr[colIdx] = val;
+    }
+    grid[rowIdx] = rowArr;
+  }
+  return grid;
+}
+
+async function parseXlsx(buffer){
+  var bytes = new Uint8Array(buffer);
+  var entries = readCentralDirectory(bytes);
+  var sharedStrings = [];
+  if (entries["xl/sharedStrings.xml"]){
+    sharedStrings = parseSharedStringsFast(textOf(await readZipEntry(bytes, entries["xl/sharedStrings.xml"])));
+  }
+  var sheetEntryNames = Object.keys(entries).filter(function(n){ return /^xl\/worksheets\/sheet\d+\.xml$/.test(n); });
+  sheetEntryNames.sort(function(a,b){
+    return parseInt(a.match(/sheet(\d+)\.xml/)[1], 10) - parseInt(b.match(/sheet(\d+)\.xml/)[1], 10);
+  });
+  var bestGrid = null;
+  for (var s=0; s<sheetEntryNames.length; s++){
+    var sheetText = textOf(await readZipEntry(bytes, entries[sheetEntryNames[s]]));
+    var grid = parseSheetTextToGrid(sheetText, sharedStrings);
+    var hasVendedor = grid.some(function(row){
+      return row && row.some(function(cell){ return normHeader(cell).indexOf("vendedor") !== -1; });
+    });
+    if (hasVendedor){ bestGrid = grid; break; }
+    if (!bestGrid) bestGrid = grid;
+  }
+  return bestGrid || [];
+}
+
+// Lee "Peso KILOS", "Peso MARGEN" y "Umbral mínimo" de las filas de configuración arriba
+// de la tabla (misma hoja), para replicar exactamente los pesos y el umbral del archivo
+// en vez de asumir 30/70 fijo. Si no los encuentra (ej. CSV recortado), usa esos defaults.
+function findNextValue(row, fromIdx){
+  for (var i=fromIdx+1; i<row.length; i++){
+    if (row[i] !== undefined && row[i] !== "") return row[i];
+  }
+  return null;
+}
+function parseTargetsConfig(grid){
+  var cfg = { pesoKg: 0.30, pesoMg: 0.70, umbral: 0 };
+  for (var r=0; r<grid.length; r++){
+    var row = grid[r] || [];
+    for (var c=0; c<row.length; c++){
+      var h = normHeader(row[c]);
+      if (!h || h.indexOf("peso") === -1 && h.indexOf("umbral") === -1) continue;
+      var v = findNextValue(row, c);
+      if (v === null) continue;
+      if (h.indexOf("peso") !== -1 && (h.indexOf("kilo") !== -1 || h.indexOf("kg") !== -1)) cfg.pesoKg = parseEsPercentValue(v);
+      else if (h.indexOf("peso") !== -1 && (h.indexOf("margen") !== -1 || h.indexOf("mg") !== -1)) cfg.pesoMg = parseEsPercentValue(v);
+      else if (h.indexOf("umbral") !== -1) cfg.umbral = parseEsPercentValue(v);
+    }
+  }
+  return cfg;
+}
+
+// PIN determinístico por nombre (mismo nombre -> mismo PIN siempre, sin guardar nada aparte).
+// No es seguridad real (cualquiera que vea el código puede recalcularlo) — es un filtro
+// liviano para que no naveguen el dato de otro vendedor por curiosidad.
+function generatePin(name){
+  var s = normHeader(name);
+  var hash = 0;
+  for (var i=0; i<s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  return String(hash % 10000).padStart(4, "0");
+}
+
+// ---- extractor 1: objetivos del mes (Comisiones.xlsx, hoja Cálculo Premio) ----
+function extractTargets(grid){
+  var headerRowIdx = -1, cols = {};
+  for (var r=0; r<grid.length; r++){
+    var row = grid[r] || [];
+    var found = { vendedor:-1, canal:-1, kgTarget:-1, mgTarget:-1, objetivoPremio:-1, premioMaximo:-1 };
+    for (var c=0; c<row.length; c++){
+      var h = normHeader(row[c]);
+      if (!h) continue;
+      if (found.vendedor === -1 && h.indexOf("vendedor") !== -1){ found.vendedor = c; continue; }
+      if (found.canal === -1 && h === "canal"){ found.canal = c; continue; }
+      if (found.objetivoPremio === -1 && h === "objetivo"){ found.objetivoPremio = c; continue; }
+      if (found.premioMaximo === -1 && h.indexOf("premio") !== -1 && h.indexOf("maximo") !== -1){ found.premioMaximo = c; continue; }
+      var isKg = h.indexOf("kg") !== -1 || h.indexOf("kilos") !== -1;
+      var isMg = h.indexOf("mg") !== -1 || h.indexOf("margen") !== -1;
+      var isCumpl = h.indexOf("cumpl") !== -1;
+      var isTarget = h.indexOf("target") !== -1 || h.indexOf("objetivo") !== -1;
+      var isExcluded = h.indexOf("comision") !== -1 || h.indexOf("premio") !== -1;
+      if (isCumpl || isExcluded) continue;
+      if (found.kgTarget === -1 && isKg && isTarget){ found.kgTarget = c; continue; }
+      if (found.mgTarget === -1 && isMg && isTarget){ found.mgTarget = c; continue; }
+    }
+    if (found.vendedor !== -1 && found.kgTarget !== -1 && found.mgTarget !== -1){
+      headerRowIdx = r; cols = found; break;
+    }
+  }
+  if (headerRowIdx === -1) return { error: "No se encontraron las columnas esperadas (Vendedor, Kg Target, MG Target). Revisá los encabezados del archivo." };
+
+  var targets = {};
+  var order = [];
+  for (var i=headerRowIdx+1; i<grid.length; i++){
+    var row = grid[i] || [];
+    var name = String(row[cols.vendedor]||"").trim();
+    if (!name) break;
+    if (normHeader(name) === "total") break;
+    var kgTarget = parseEsNumber(row[cols.kgTarget]);
+    var mgTarget = parseEsPercentValue(row[cols.mgTarget]);
+    var canal = cols.canal !== -1 ? String(row[cols.canal]||"").trim() : "";
+    var objetivoPremio = cols.objetivoPremio !== -1 ? parseEsNumber(row[cols.objetivoPremio]) : 0;
+    var premioMaximo = cols.premioMaximo !== -1 ? parseEsNumber(row[cols.premioMaximo]) : 0;
+    targets[name] = { canal:canal, kgTarget:kgTarget, mgTarget:mgTarget, objetivoPremio:objetivoPremio, premioMaximo:premioMaximo, pin:generatePin(name) };
+    order.push(name);
+  }
+  if (!order.length) return { error: "El archivo no tiene filas de vendedores debajo del encabezado." };
+  return { targets: targets, order: order, config: parseTargetsConfig(grid) };
+}
+
+// ---- extractor 2: avance real (Reporte MACO x Cliente, hoja Base) ----
+function extractReales(grid){
+  var headerRowIdx = -1, cols = {};
+  for (var r=0; r<grid.length; r++){
+    var row = grid[r] || [];
+    var found = { vendedor:-1, tipo:-1, categoria:-1, precio:-1, peso:-1, impNeto:-1, costoNeto:-1 };
+    for (var c=0; c<row.length; c++){
+      var h = normHeader(row[c]);
+      if (!h) continue;
+      if (found.vendedor === -1 && h.indexOf("vendedor") !== -1){ found.vendedor = c; continue; }
+      if (found.tipo === -1 && h.indexOf("tipo") !== -1 && h.indexOf("comprobante") !== -1){ found.tipo = c; continue; }
+      if (found.categoria === -1 && h.indexOf("categoria") !== -1){ found.categoria = c; continue; }
+      if (found.precio === -1 && h.indexOf("precio") !== -1 && h.indexOf("iva") === -1){ found.precio = c; continue; }
+      if (found.peso === -1 && h.indexOf("peso") !== -1 && h.indexOf("unitario") === -1){ found.peso = c; continue; }
+      if (found.impNeto === -1 && h.indexOf("importe") !== -1 && h.indexOf("neto") !== -1){ found.impNeto = c; continue; }
+      if (found.costoNeto === -1 && h.indexOf("costo") !== -1 && h.indexOf("neto") !== -1){ found.costoNeto = c; continue; }
+    }
+    var allFound = found.vendedor !== -1 && found.tipo !== -1 && found.categoria !== -1 && found.precio !== -1 &&
+      found.peso !== -1 && found.impNeto !== -1 && found.costoNeto !== -1;
+    if (allFound){ headerRowIdx = r; cols = found; break; }
+  }
+  if (headerRowIdx === -1){
+    return { error: "No se encontraron las columnas esperadas del Reporte MACO x Cliente (VENDEDOR OK, Tipo de comprobante, categoria, precio, peso, Importe NETO, Costo total NETO) en la hoja Base." };
+  }
+
+  var acc = {};
+  var stats = { total:0, remito:0, muestra:0, precioExcl:0, sinVendedor:0, validas:0 };
+  for (var i=headerRowIdx+1; i<grid.length; i++){
+    var row = grid[i];
+    if (!row) continue;
+    var hasAny = row[cols.impNeto] !== undefined || row[cols.peso] !== undefined;
+    if (!hasAny) continue;
+    stats.total++;
+
+    var tipo = normHeader(row[cols.tipo]);
+    if (TIPO_EXCL.indexOf(tipo) !== -1){ stats.remito++; continue; }
+
+    var cat = normHeader(row[cols.categoria]);
+    if (CATEGORIA_EXCL.indexOf(cat) !== -1){ stats.muestra++; continue; }
+
+    var precio = parseEsNumber(row[cols.precio]);
+    if (precio <= PRECIO_MIN){ stats.precioExcl++; continue; }
+
+    var name = String(row[cols.vendedor]||"").trim();
+    if (!name){ stats.sinVendedor++; continue; }
+
+    var peso = parseEsNumber(row[cols.peso]);
+    var imp = parseEsNumber(row[cols.impNeto]);
+    var cos = parseEsNumber(row[cols.costoNeto]);
+
+    if (!acc[name]) acc[name] = { kg:0, imp:0, cos:0 };
+    acc[name].kg += peso;
+    acc[name].imp += imp;
+    acc[name].cos += cos;
+    stats.validas++;
+  }
+
+  var reales = {};
+  for (var vend in acc){
+    var a = acc[vend];
+    reales[vend] = { kgReal: a.kg, mgReal: a.imp > 0 ? (a.imp - a.cos) / a.imp : 0 };
+  }
+  if (!Object.keys(reales).length) return { error: "No se encontraron líneas de venta válidas en la hoja Base." };
+  return { reales: reales, stats: stats };
+}
+
+async function decodeFileToGrid(file){
+  var buf = await file.arrayBuffer();
+  var bytes = new Uint8Array(buf);
+  var isZip = bytes[0] === 0x50 && bytes[1] === 0x4B;
+  if (isZip || /\.xlsx$/i.test(file.name)){
+    if (typeof DecompressionStream === "undefined"){
+      throw new Error("Tu navegador no puede leer archivos .xlsx directamente. Exportá el archivo como CSV (Archivo > Guardar como > CSV) y subí ese archivo.");
+    }
+    return await parseXlsx(buf);
+  }
+  var text;
+  try { text = new TextDecoder("utf-8", { fatal:true }).decode(buf); }
+  catch(e){ text = new TextDecoder("windows-1252").decode(buf); }
+  return parseCsv(text);
+}
+
+// ---- rendering ----
+function pctLabel(x){
+  var rounded = Math.round(x*1000)/10;
+  return rounded.toLocaleString("es-AR", { minimumFractionDigits: rounded % 1 === 0 ? 0 : 1, maximumFractionDigits: 1 }) + "%";
+}
+function stateOf(v){
+  if (v.pending) return { key:"pending", color:"var(--stone2)", bg:"var(--panel2)", label:"Sin datos reales todavía" };
+  if (v.premioFinal >= 1) return { key:"verde", color:"var(--olive)", bg:"var(--olive-bg)", label: v.premioFinal > 1 ? "¡Superó el objetivo!" : "Objetivo alcanzado" };
+  if (v.premioFinal > 0) return { key:"amarillo", color:"#8C6A1A", bg:"var(--gold-bg)", label:"Por debajo del objetivo" };
+  return { key:"rojo", color:"var(--wine)", bg:"var(--wine-bg)", label:"No llegó al mínimo para cobrar" };
+}
+
+function polar(cx, cy, r, deg){
+  var rad = (deg) * Math.PI / 180;
+  return { x: cx + r*Math.cos(rad), y: cy - r*Math.sin(rad) };
+}
+function arcPath(cx, cy, r, startDeg, endDeg){
+  var p1 = polar(cx, cy, r, startDeg), p2 = polar(cx, cy, r, endDeg);
+  var largeArc = Math.abs(startDeg - endDeg) > 180 ? 1 : 0;
+  return "M " + p1.x + " " + p1.y + " A " + r + " " + r + " 0 " + largeArc + " 1 " + p2.x + " " + p2.y;
+}
+
+function renderGauge(premioFinal, color, tope){
+  var cx=160, cy=160, r=128;
+  var maxScale = Math.max(1, tope || 1);
+  var frac = Math.max(0, Math.min(premioFinal / maxScale, 1));
+  var track = document.getElementById("gauge-track");
+  track.setAttribute("d", arcPath(cx, cy, r, 180, 0));
+  track.setAttribute("stroke", "var(--line2)");
+  track.setAttribute("stroke-width", "20");
+
+  var tick = document.getElementById("gauge-tick100");
+  if (maxScale > 1.001){
+    var tickDeg = 180 - (1/maxScale)*180;
+    var t1 = polar(cx, cy, r-14, tickDeg), t2 = polar(cx, cy, r+14, tickDeg);
+    tick.setAttribute("d", "M "+t1.x+" "+t1.y+" L "+t2.x+" "+t2.y);
+    tick.setAttribute("stroke", "var(--stone2)");
+    tick.setAttribute("stroke-width", "2");
+  } else {
+    tick.setAttribute("d", "");
+  }
+
+  var valueEl = document.getElementById("gauge-value");
+  if (frac > 0.002){
+    valueEl.setAttribute("d", arcPath(cx, cy, r, 180, 180 - frac*180));
+  } else {
+    valueEl.setAttribute("d", "");
+  }
+  valueEl.setAttribute("stroke", color);
+  valueEl.setAttribute("stroke-width", "20");
+}
+
+function fmtKg(n){ return Math.round(n).toLocaleString("es-AR"); }
+function fmtMoney(n){ return "$" + Math.round(n||0).toLocaleString("es-AR"); }
+
+function pctRound(x){ return Math.round(x*100); }
+
+function showResult(v){
+  document.getElementById("res-name").textContent = v.name;
+  document.getElementById("res-canal").textContent = v.canal || "";
+  document.getElementById("res-period").textContent = STATE.period ? "Período: " + STATE.period : "";
+
+  document.getElementById("kg-weight").textContent = "peso " + pctRound(v.pesoKg) + "%";
+  document.getElementById("mg-weight").textContent = "peso " + pctRound(v.pesoMg) + "%";
+  var umbral = (STATE.config && STATE.config.umbral) || 0;
+  document.getElementById("formula-note").textContent =
+    "Premio final = cumpl. kilos × " + pctRound(v.pesoKg) + "% + cumpl. margen × " + pctRound(v.pesoMg) +
+    "% · tope " + pctRound(v.tope) + "%" + (umbral > 0 ? " · mínimo " + pctRound(umbral) + "% para cobrar" : "");
+
+  var st = stateOf(v);
+  document.getElementById("gauge-num").textContent = pctLabel(v.premioFinal);
+  document.getElementById("gauge-num").style.color = st.color;
+  document.getElementById("gauge-state").style.background = st.bg;
+  document.getElementById("gauge-state").style.color = st.color;
+  document.getElementById("gauge-state-label").textContent = st.label;
+  document.querySelector("#gauge-state .dot").style.background = st.color;
+  renderGauge(v.premioFinal, st.color, v.tope);
+
+  document.getElementById("premio-pagar").textContent = fmtMoney(v.premioAPagar);
+  document.getElementById("premio-objetivo").textContent = fmtMoney(v.objetivoPremio);
+  document.getElementById("premio-maximo").textContent = fmtMoney(v.premioMaximo);
+
+  document.getElementById("kg-real").textContent = fmtKg(v.kgReal);
+  document.getElementById("kg-target").textContent = fmtKg(v.kgTarget);
+  document.getElementById("kg-pct").textContent = pctLabel(v.cumplKg);
+  document.getElementById("kg-bar").style.width = Math.min(v.cumplKg*100,100) + "%";
+  document.getElementById("kg-bar").style.background = v.cumplKg >= 1 ? "var(--olive)" : (v.cumplKg >= 0.8 ? "#8C6A1A" : "var(--wine)");
+
+  document.getElementById("mg-real").textContent = pctLabel(v.mgReal);
+  document.getElementById("mg-target").textContent = pctLabel(v.mgTarget);
+  document.getElementById("mg-pct").textContent = pctLabel(v.cumplMg);
+  document.getElementById("mg-bar").style.width = Math.min(v.cumplMg*100,100) + "%";
+  document.getElementById("mg-bar").style.background = v.cumplMg >= 1 ? "var(--olive)" : (v.cumplMg >= 0.8 ? "#8C6A1A" : "var(--wine)");
+
+  goTo("view-result");
+}
+
+function computeVendors(){
+  var cfg = STATE.config || { pesoKg: 0.30, pesoMg: 0.70, umbral: 0 };
+  var vendors = [];
+  for (var name in STATE.targets){
+    var t = STATE.targets[name];
+    var r = STATE.reales[name];
+    var kgReal = r ? r.kgReal : 0;
+    var mgReal = r ? r.mgReal : 0;
+    // Misma lógica que Comisiones.xlsx (fila a fila, confirmado con las fórmulas del archivo):
+    // Cumpl. Kilos y Cumpl. Margen NO tienen tope individual (=D/C, =G/F tal cual).
+    // %Comisión = 0 si el ponderado < umbral (piso), si no MIN(tope, ponderado).
+    // El tope efectivo sale de Premio Máximo / Objetivo (siempre 1.5x en el archivo actual).
+    var cumplKg = t.kgTarget > 0 ? kgReal/t.kgTarget : 0;
+    var cumplMg = t.mgTarget > 0 ? mgReal/t.mgTarget : 0;
+    var weighted = cumplKg*cfg.pesoKg + cumplMg*cfg.pesoMg;
+    var tope = t.objetivoPremio > 0 ? t.premioMaximo/t.objetivoPremio : 1.5;
+    var premioFinal = weighted < cfg.umbral ? 0 : Math.min(tope, weighted);
+    vendors.push({
+      name: name, canal: t.canal, kgTarget: t.kgTarget, mgTarget: t.mgTarget,
+      kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplMg: cumplMg, tope: tope,
+      objetivoPremio: t.objetivoPremio, premioMaximo: t.premioMaximo, premioAPagar: premioFinal*t.objetivoPremio,
+      pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin
+    });
+  }
+  return vendors;
+}
+
+function populateLoginSelect(){
+  var sel = document.getElementById("vendor-select");
+  sel.innerHTML = "";
+  var empty = document.getElementById("login-empty");
+  var form = document.getElementById("login-form");
+  var vendors = computeVendors();
+  if (!vendors.length){
+    empty.classList.remove("hidden");
+    form.classList.add("hidden");
+    return;
+  }
+  empty.classList.add("hidden");
+  form.classList.remove("hidden");
+  document.getElementById("login-hint").textContent = STATE.period
+    ? "Elegí tu nombre para ver tu avance de " + STATE.period + "."
+    : "Elegí tu nombre para ver tu avance.";
+  vendors.sort(function(a,b){ return a.name.localeCompare(b.name, "es"); }).forEach(function(v){
+    var opt = document.createElement("option");
+    opt.value = v.name; opt.textContent = v.name;
+    sel.appendChild(opt);
+  });
+}
+
+function goTo(id){
+  ["view-login","view-result","view-admin"].forEach(function(v){
+    document.getElementById(v).classList.toggle("hidden", v !== id);
+  });
+}
+
+async function loadFromStorage(){
+  if (!hasStorage()) return;
+  try {
+    var res = await window.storage.get(STORE_KEY);
+    if (res && res.value){
+      var data = JSON.parse(res.value);
+      STATE.period = data.period || "";
+      STATE.targets = data.targets || {};
+      STATE.reales = data.reales || {};
+      STATE.updatedAtTargets = data.updatedAtTargets || null;
+      STATE.updatedAtReal = data.updatedAtReal || null;
+    }
+  } catch(e){ /* published storage may be unavailable during preview */ }
+}
+
+async function saveToStorage(){
+  var payload = JSON.stringify({
+    period: STATE.period, targets: STATE.targets, reales: STATE.reales,
+    updatedAtTargets: STATE.updatedAtTargets, updatedAtReal: STATE.updatedAtReal
+  });
+  if (hasStorage()){
+    await window.storage.set(STORE_KEY, payload, true);
+  }
+}
+
+function fmtWhen(iso){
+  if (!iso) return "todavía no se cargó";
+  var d = new Date(iso);
+  return d.toLocaleDateString("es-AR") + " " + d.toLocaleTimeString("es-AR", { hour:"2-digit", minute:"2-digit" });
+}
+
+function renderTargetsPreview(targets, order){
+  var wrap = document.getElementById("targets-preview-wrap");
+  var rows = order.map(function(name){
+    var t = targets[name];
+    return "<tr><td class='name'>"+name+"</td><td>"+(t.canal||"—")+"</td><td>"+fmtKg(t.kgTarget)+"</td><td>"+pctLabel(t.mgTarget)+"</td><td>"+t.pin+"</td></tr>";
+  }).join("");
+  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>Canal</th><th>Kg target</th><th>MG target</th><th>PIN</th></tr></thead><tbody>"+rows+"</tbody></table>" +
+    "<div class='admin-meta'>Repartí el PIN de cada uno por WhatsApp o el medio que uses — es el mismo todos los meses mientras no le cambies el nombre.</div>";
+}
+
+function renderRealesPreview(reales){
+  var wrap = document.getElementById("reales-preview-wrap");
+  var names = Object.keys(reales).sort(function(a,b){ return a.localeCompare(b,"es"); });
+  var rows = names.map(function(name){
+    var r = reales[name];
+    return "<tr><td class='name'>"+name+"</td><td>"+fmtKg(r.kgReal)+"</td><td>"+pctLabel(r.mgReal)+"</td></tr>";
+  }).join("");
+  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>Kg real</th><th>MG real</th></tr></thead><tbody>"+rows+"</tbody></table>";
+}
+
+function setStatus(elId, kind, msg){
+  document.getElementById(elId).innerHTML = "<div class='status "+kind+"'>"+msg+"</div>";
+}
+
+function defaultPeriod(){
+  var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  var d = new Date();
+  return meses[d.getMonth()] + " " + d.getFullYear();
+}
+
+document.getElementById("btn-ingresar").addEventListener("click", function(){
+  var name = document.getElementById("vendor-select").value;
+  var pin = document.getElementById("pin-input").value.trim();
+  var v = computeVendors().find(function(x){ return x.name === name; });
+  var errEl = document.getElementById("pin-error");
+  if (v && pin === v.pin){
+    errEl.classList.add("hidden");
+    document.getElementById("pin-input").value = "";
+    showResult(v);
+  } else {
+    errEl.classList.remove("hidden");
+  }
+});
+
+document.getElementById("btn-volver").addEventListener("click", function(){
+  document.getElementById("pin-input").value = "";
+  document.getElementById("pin-error").classList.add("hidden");
+  goTo("view-login");
+});
+
+function resetAdminSection(prefix){
+  document.getElementById(prefix + "-status").innerHTML = "";
+  document.getElementById(prefix + "-preview-wrap").innerHTML = "";
+  var warnEl = document.getElementById(prefix + "-warn");
+  if (warnEl) warnEl.innerHTML = "";
+  document.getElementById("btn-publicar-" + prefix).disabled = true;
+}
+
+document.getElementById("link-admin").addEventListener("click", function(){
+  document.getElementById("period-input").value = STATE.period || defaultPeriod();
+  resetAdminSection("targets");
+  resetAdminSection("reales");
+  pendingTargets = null;
+  pendingReales = null;
+  document.getElementById("targets-meta").textContent = "Última carga: " + fmtWhen(STATE.updatedAtTargets);
+  document.getElementById("reales-meta").textContent = "Última carga: " + fmtWhen(STATE.updatedAtReal);
+  document.getElementById("export-status").innerHTML = "";
+  document.getElementById("btn-exportar").disabled = !(Object.keys(STATE.targets).length || Object.keys(STATE.reales).length);
+  goTo("view-admin");
+});
+document.getElementById("link-login").addEventListener("click", function(){ goTo("view-login"); });
+
+document.getElementById("file-input-targets").addEventListener("change", async function(e){
+  var file = e.target.files[0];
+  if (!file) return;
+  document.getElementById("drop-label-targets").textContent = file.name;
+  setStatus("targets-status", "info", "Leyendo archivo…");
+  document.getElementById("btn-publicar-targets").disabled = true;
+  try {
+    var grid = await decodeFileToGrid(file);
+    var result = extractTargets(grid);
+    if (result.error){ setStatus("targets-status", "err", result.error); return; }
+    pendingTargets = result;
+    renderTargetsPreview(result.targets, result.order);
+    setStatus("targets-status", "ok", "Se leyeron " + result.order.length + " vendedores. Revisá la vista previa y confirmá para guardar.");
+    document.getElementById("btn-publicar-targets").disabled = false;
+  } catch(err){
+    setStatus("targets-status", "err", err && err.message ? err.message : "No se pudo leer el archivo. Verificá que sea un .xlsx o .csv válido.");
+  }
+});
+
+document.getElementById("file-input-reales").addEventListener("change", async function(e){
+  var file = e.target.files[0];
+  if (!file) return;
+  document.getElementById("drop-label-reales").textContent = file.name;
+  setStatus("reales-status", "info", "Leyendo archivo… puede tardar unos segundos si tiene miles de líneas.");
+  document.getElementById("reales-warn").innerHTML = "";
+  document.getElementById("btn-publicar-reales").disabled = true;
+  try {
+    var grid = await decodeFileToGrid(file);
+    var result = extractReales(grid);
+    if (result.error){ setStatus("reales-status", "err", result.error); return; }
+    pendingReales = result;
+    renderRealesPreview(result.reales);
+    var s = result.stats;
+    setStatus("reales-status", "ok",
+      Object.keys(result.reales).length + " vendedores con ventas. " + s.validas + " líneas válidas de " + s.total +
+      " (excluidas: " + s.remito + " remitos, " + s.muestra + " muestras/ecommerce, " + s.precioExcl + " precio ≤ 1).");
+    document.getElementById("btn-publicar-reales").disabled = false;
+  } catch(err){
+    setStatus("reales-status", "err", err && err.message ? err.message : "No se pudo leer el archivo. Verificá que sea un .xlsx o .csv válido.");
+  }
+});
+
+document.getElementById("btn-publicar-targets").addEventListener("click", async function(){
+  if (!pendingTargets) return;
+  STATE.targets = pendingTargets.targets;
+  STATE.config = pendingTargets.config;
+  STATE.period = document.getElementById("period-input").value.trim() || defaultPeriod();
+  STATE.updatedAtTargets = new Date().toISOString();
+  if (hasStorage()){
+    try { await saveToStorage(); } catch(e){ /* no-op outside Claude */ }
+  }
+  setStatus("targets-status", "ok", "Listo: " + pendingTargets.order.length + " vendedores para " + STATE.period + ". No olvides descargar y subir la página al final (paso 3).");
+  document.getElementById("targets-meta").textContent = "Última carga: " + fmtWhen(STATE.updatedAtTargets);
+  document.getElementById("btn-exportar").disabled = false;
+  populateLoginSelect();
+});
+
+document.getElementById("btn-publicar-reales").addEventListener("click", async function(){
+  if (!pendingReales) return;
+  STATE.reales = pendingReales.reales;
+  STATE.updatedAtReal = new Date().toISOString();
+  if (hasStorage()){
+    try { await saveToStorage(); } catch(e){ /* no-op outside Claude */ }
+  }
+  setStatus("reales-status", "ok", "Listo: avance real actualizado. No olvides descargar y subir la página al final (paso 3).");
+  var warnEl = document.getElementById("reales-warn");
+  var sinTarget = Object.keys(STATE.reales).filter(function(n){ return !STATE.targets[n]; });
+  if (sinTarget.length){
+    warnEl.innerHTML = "<div class='warn-list'>Aviso: " + sinTarget.length + " nombre(s) del reporte de ventas no tienen objetivo cargado, no van a aparecer en la app (puede ser un error de nombre, o gente que no cobra premio individual): " +
+      sinTarget.join(", ") + "<div style='margin-top:10px'><button class='btn ghost' id='btn-warn-continuar' style='width:auto; padding:7px 16px'>Continuar</button></div></div>";
+    document.getElementById("btn-warn-continuar").addEventListener("click", function(){ warnEl.innerHTML = ""; });
+  } else {
+    warnEl.innerHTML = "";
+  }
+  document.getElementById("reales-meta").textContent = "Última carga: " + fmtWhen(STATE.updatedAtReal);
+  document.getElementById("btn-exportar").disabled = false;
+  populateLoginSelect();
+});
+
+document.getElementById("btn-exportar").addEventListener("click", function(){
+  try {
+    var html = "<!doctype html>\n" + document.documentElement.outerHTML;
+    var stateJson = JSON.stringify(STATE);
+    var marker = /\/\*__BAKED_STATE__\*\/[\s\S]*?\/\*__END_BAKED_STATE__\*\//;
+    html = html.replace(marker, function(){
+      return "/*__BAKED_STATE__*/var BAKED_STATE = " + stateJson + ";/*__END_BAKED_STATE__*/";
+    });
+    var blob = new Blob([html], { type: "text/html" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "index.html";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setStatus("export-status", "ok", "Descargado. Arrastralo a tu repositorio de GitHub reemplazando index.html.");
+  } catch(e){
+    setStatus("export-status", "err", "No se pudo generar el archivo. Probá de nuevo o avisale a quien armó la app.");
+  }
+});
+
+(async function init(){
+  await loadFromStorage();
+  populateLoginSelect();
+  goTo("view-login");
+})();
+
+})();
+</script>
+
+
+</body></html>
