@@ -96,6 +96,11 @@ select:focus, input:focus{outline:none; border-color:var(--gold); box-shadow:0 0
 .bar-fill{height:100%; border-radius:5px}
 .note{font-size:12px; color:var(--stone2); margin-top:22px; line-height:1.6; text-align:center}
 .money-card{background:var(--olive-bg); border:1px solid var(--olive-soft); border-radius:12px; padding:18px 20px; text-align:center; margin:4px 0 26px}
+.proj-card{background:var(--gold-bg); border:1px solid var(--gold-soft); border-radius:12px; padding:15px 18px; margin:-8px 0 26px}
+.proj-title{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:#8C6A1A; font-weight:600; margin-bottom:9px}
+.proj-row{display:flex; justify-content:space-between; align-items:baseline; font-size:13.5px; margin-bottom:3px}
+.proj-row span:last-child{font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink)}
+.proj-hint{font-size:11px; color:var(--stone); margin-top:7px; line-height:1.5}
 .money-label{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--olive); font-weight:600}
 .money-value{font-family:Georgia,serif; font-size:34px; font-weight:700; margin:5px 0 7px; color:var(--ink); font-variant-numeric:tabular-nums}
 .money-sub{font-size:12px; color:var(--stone)}
@@ -189,6 +194,13 @@ table.prev td.name{font-variant-numeric:normal}
         <div class="money-label">Premio a pagar</div>
         <div class="money-value" id="premio-pagar">$0</div>
         <div class="money-sub">Objetivo <b id="premio-objetivo">$736.000</b> · Máximo <b id="premio-maximo">$1.104.000</b></div>
+      </div>
+
+      <div class="proj-card hidden" id="proj-card">
+        <div class="proj-title">Proyección a fin de mes</div>
+        <div class="proj-row"><span>Kg proyectado</span><span id="proj-kg">0</span></div>
+        <div class="proj-row"><span>Premio proyectado</span><span id="proj-premio">$0</span></div>
+        <div class="proj-hint">Si seguís vendiendo a este ritmo el resto del mes, con el margen actual sin cambios.</div>
       </div>
 
       <div class="breakdown">
@@ -285,7 +297,7 @@ table.prev td.name{font-variant-numeric:normal}
 "use strict";
 
 var STORE_KEY = "premios_formagge_v1";
-/*__BAKED_STATE__*/var BAKED_STATE = {"period":"Julio 2026","targets":{"Ignacio Sancho":{"canal":"Mayoristas","kgTarget":11100,"mgTarget":0.21,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"7362"},"Manuela Pesaresi":{"canal":"Gastronomia","kgTarget":16000,"mgTarget":0.243,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"3693"},"Ivo Lattuada":{"canal":"Gastronomia","kgTarget":11700,"mgTarget":0.253,"objetivoPremio":646752,"premioMaximo":970128,"pin":"5708"},"Rodrigo Barria":{"canal":"Gastronomia","kgTarget":5000,"mgTarget":0.306,"objetivoPremio":368000,"premioMaximo":552000,"pin":"6977"},"Daniel Masulli":{"canal":"Gastronomia","kgTarget":7300,"mgTarget":0.329,"objetivoPremio":646752,"premioMaximo":970128,"pin":"6114"},"Javier Ochoteco":{"canal":"Tradicional","kgTarget":5600,"mgTarget":0.343,"objetivoPremio":800000,"premioMaximo":1200000,"pin":"6593"},"Juan Tammaro":{"canal":"Tradicional","kgTarget":1000,"mgTarget":0.34,"objetivoPremio":552000,"premioMaximo":828000,"pin":"1993"},"Agustin Balate":{"canal":"Tradicional","kgTarget":2400,"mgTarget":0.374,"objetivoPremio":320000,"premioMaximo":480000,"pin":"2672"},"Martin Fernandez":{"canal":"Supermercado","kgTarget":3500,"mgTarget":0.271,"objetivoPremio":240000,"premioMaximo":360000,"pin":"2524"},"Emiliano Montes":{"canal":"Supermercado","kgTarget":10800,"mgTarget":0.3,"objetivoPremio":0,"premioMaximo":0,"pin":"6994"},"Distribuidores":{"canal":"Distribuidores","kgTarget":2000,"mgTarget":0.278,"objetivoPremio":0,"premioMaximo":0,"pin":"2188"}},"config":{"pesoKg":0.3,"pesoMg":0.7,"umbral":0.8},"reales":{"Agustin Balate":{"kgReal":161.7,"mgReal":0.38225610892149525},"Juan Tammaro":{"kgReal":662.12,"mgReal":0.25009838614912216},"Daniel Masulli":{"kgReal":1923.4299999999994,"mgReal":0.33106098980611126},"Ivo Lattuada":{"kgReal":1545.4300000000005,"mgReal":0.2997369540019792},"Bajas Gastro":{"kgReal":53.599999999999994,"mgReal":0.32176721136360514},"Manuela Pesaresi":{"kgReal":2889.1400000000003,"mgReal":0.24512058856549535},"Emiliano Montes":{"kgReal":1447.1000000000022,"mgReal":0.23370395557693124},"Ignacio Sancho":{"kgReal":3671.42,"mgReal":0.20665774311958687},"Javier Ochoteco":{"kgReal":590.2800000000002,"mgReal":0.3986512909450293},"Rodrigo Barria":{"kgReal":847.0100000000002,"mgReal":0.31773583856259036},"Martin Fernandez":{"kgReal":298.58000000000004,"mgReal":0.264978665513506},"Web":{"kgReal":11.2,"mgReal":0.5503041597287786},"Distribuidores":{"kgReal":758.2499999999997,"mgReal":0.24119553462644103},"Oficina":{"kgReal":16.21,"mgReal":0.19652595324842803}},"updatedAtTargets":"2026-07-12T23:18:03.749Z","updatedAtReal":"2026-07-12T23:18:03.749Z"};/*__END_BAKED_STATE__*/
+/*__BAKED_STATE__*/var BAKED_STATE = {"period":"Julio 2026","targets":{"Ignacio Sancho":{"canal":"Mayoristas","kgTarget":11100,"mgTarget":0.21,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"7362"},"Manuela Pesaresi":{"canal":"Gastronomia","kgTarget":16000,"mgTarget":0.243,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"3693"},"Ivo Lattuada":{"canal":"Gastronomia","kgTarget":11700,"mgTarget":0.253,"objetivoPremio":646752,"premioMaximo":970128,"pin":"5708"},"Rodrigo Barria":{"canal":"Gastronomia","kgTarget":5000,"mgTarget":0.306,"objetivoPremio":368000,"premioMaximo":552000,"pin":"6977"},"Daniel Masulli":{"canal":"Gastronomia","kgTarget":7300,"mgTarget":0.329,"objetivoPremio":646752,"premioMaximo":970128,"pin":"6114"},"Javier Ochoteco":{"canal":"Tradicional","kgTarget":5600,"mgTarget":0.343,"objetivoPremio":800000,"premioMaximo":1200000,"pin":"6593"},"Juan Tammaro":{"canal":"Tradicional","kgTarget":1000,"mgTarget":0.34,"objetivoPremio":552000,"premioMaximo":828000,"pin":"1993"},"Agustin Balate":{"canal":"Tradicional","kgTarget":2400,"mgTarget":0.374,"objetivoPremio":320000,"premioMaximo":480000,"pin":"2672"},"Martin Fernandez":{"canal":"Supermercado","kgTarget":3500,"mgTarget":0.271,"objetivoPremio":240000,"premioMaximo":360000,"pin":"2524"},"Emiliano Montes":{"canal":"Supermercado","kgTarget":10800,"mgTarget":0.3,"objetivoPremio":0,"premioMaximo":0,"pin":"6994"},"Distribuidores":{"canal":"Distribuidores","kgTarget":2000,"mgTarget":0.278,"objetivoPremio":0,"premioMaximo":0,"pin":"2188"}},"config":{"pesoKg":0.3,"pesoMg":0.7,"umbral":0.8},"reales":{"Rodrigo Barria":{"kgReal":980.1300000000001,"mgReal":0.3354871830876932},"Manuela Pesaresi":{"kgReal":4520.899999999996,"mgReal":0.22803495305574936},"Ignacio Sancho":{"kgReal":5974.469999999997,"mgReal":0.19005750062236013},"Distribuidores":{"kgReal":814.55,"mgReal":0.24138601380574315},"Oficina":{"kgReal":16.21,"mgReal":0.19652595324842792},"Ivo Lattuada":{"kgReal":2106.5600000000013,"mgReal":0.29891137864367195},"Emiliano Montes":{"kgReal":1696.6100000000001,"mgReal":0.24506719966033255},"Martin Fernandez":{"kgReal":328.81,"mgReal":0.28922817996646366},"Muestras":{"kgReal":6.3,"mgReal":0.20270588041493917},"Ignacio Sancho SMK":{"kgReal":11.739999999999997,"mgReal":-0.510423004814969},"Juan Tammaro":{"kgReal":763.9000000000001,"mgReal":0.22530412163081381},"Javier Ochoteco":{"kgReal":742.98,"mgReal":0.4195367201706133},"Daniel Masulli":{"kgReal":2291.7599999999998,"mgReal":0.3141727063954082},"Agustin Balate":{"kgReal":214.29999999999993,"mgReal":0.37548487030897904},"Bajas Tradi":{"kgReal":25.770000000000003,"mgReal":0.3364558607800408},"Pedidos Web":{"kgReal":19.2,"mgReal":0.540717531715045}},"proyeccion":{"diaTranscurrido":12,"diasDelMes":31},"updatedAtTargets":"2026-07-13T22:28:54.543Z","updatedAtReal":"2026-07-13T22:28:54.543Z"};/*__END_BAKED_STATE__*/
 var STATE = BAKED_STATE || { period:"", targets:{}, reales:{}, config:{ pesoKg:0.30, pesoMg:0.70, umbral:0 }, updatedAtTargets:null, updatedAtReal:null };
 STATE.config = STATE.config || { pesoKg:0.30, pesoMg:0.70, umbral:0 };
 var pendingTargets = null;
@@ -740,6 +752,15 @@ function showResult(v){
   document.getElementById("premio-objetivo").textContent = fmtMoney(v.objetivoPremio);
   document.getElementById("premio-maximo").textContent = fmtMoney(v.premioMaximo);
 
+  var projCard = document.getElementById("proj-card");
+  if (v.kgProyectado !== null && v.kgProyectado !== undefined){
+    projCard.classList.remove("hidden");
+    document.getElementById("proj-kg").textContent = fmtKg(v.kgProyectado) + " kg";
+    document.getElementById("proj-premio").textContent = fmtMoney(v.premioAPagarProyectado) + " (" + pctLabel(v.premioFinalProyectado) + ")";
+  } else {
+    projCard.classList.add("hidden");
+  }
+
   document.getElementById("kg-real").textContent = fmtKg(v.kgReal);
   document.getElementById("kg-target").textContent = fmtKg(v.kgTarget);
   document.getElementById("kg-pct").textContent = pctLabel(v.cumplKg);
@@ -772,11 +793,27 @@ function computeVendors(){
     var weighted = cumplKg*cfg.pesoKg + cumplMg*cfg.pesoMg;
     var tope = t.objetivoPremio > 0 ? t.premioMaximo/t.objetivoPremio : 1.5;
     var premioFinal = weighted < cfg.umbral ? 0 : Math.min(tope, weighted);
+
+    // Proyección a fin de mes: solo el kilaje se proyecta por ritmo de venta
+    // (real / día transcurrido × días del mes, misma lógica que el Dashboard MACO).
+    // El margen se deja como el actual (no tiene sentido "proyectar" un promedio).
+    var proy = STATE.proyeccion;
+    var kgProyectado = null, cumplKgProyectado = null, premioFinalProyectado = null, premioAPagarProyectado = null;
+    if (r && proy && proy.diaTranscurrido > 0){
+      kgProyectado = (kgReal / proy.diaTranscurrido) * proy.diasDelMes;
+      cumplKgProyectado = t.kgTarget > 0 ? kgProyectado/t.kgTarget : 0;
+      var weightedProy = cumplKgProyectado*cfg.pesoKg + cumplMg*cfg.pesoMg;
+      premioFinalProyectado = weightedProy < cfg.umbral ? 0 : Math.min(tope, weightedProy);
+      premioAPagarProyectado = premioFinalProyectado * t.objetivoPremio;
+    }
+
     vendors.push({
       name: name, canal: t.canal, kgTarget: t.kgTarget, mgTarget: t.mgTarget,
       kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplMg: cumplMg, tope: tope,
       objetivoPremio: t.objetivoPremio, premioMaximo: t.premioMaximo, premioAPagar: premioFinal*t.objetivoPremio,
-      pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin
+      pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin,
+      kgProyectado: kgProyectado, cumplKgProyectado: cumplKgProyectado,
+      premioFinalProyectado: premioFinalProyectado, premioAPagarProyectado: premioAPagarProyectado
     });
   }
   return vendors;
@@ -971,10 +1008,18 @@ document.getElementById("btn-publicar-targets").addEventListener("click", async 
   populateLoginSelect();
 });
 
+function computeProyeccionMeta(dateIso){
+  var d = dateIso ? new Date(dateIso) : new Date();
+  var diaTranscurrido = Math.max(1, d.getDate() - 1);
+  var diasDelMes = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+  return { diaTranscurrido: diaTranscurrido, diasDelMes: diasDelMes };
+}
+
 document.getElementById("btn-publicar-reales").addEventListener("click", async function(){
   if (!pendingReales) return;
   STATE.reales = pendingReales.reales;
   STATE.updatedAtReal = new Date().toISOString();
+  STATE.proyeccion = computeProyeccionMeta(STATE.updatedAtReal);
   if (hasStorage()){
     try { await saveToStorage(); } catch(e){ /* no-op outside Claude */ }
   }
