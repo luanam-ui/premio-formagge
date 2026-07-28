@@ -197,16 +197,15 @@ table.prev td.name{font-variant-numeric:normal}
       </div>
 
       <div class="proj-card hidden" id="proj-card">
-        <div class="proj-title">Proyección a fin de mes</div>
-        <div class="proj-row"><span>Kg proyectado</span><span id="proj-kg">0</span></div>
-        <div class="proj-row"><span>Premio proyectado</span><span id="proj-premio">$0</span></div>
-        <div class="proj-hint">Si seguís vendiendo a este ritmo el resto del mes, con el margen actual sin cambios.</div>
+        <div class="proj-title">Avance real hasta hoy</div>
+        <div class="proj-row"><span>Kg real</span><span id="proj-kg">0</span></div>
+        <div class="proj-hint">El premio de arriba usa el kilo proyectado a fin de mes (30%) + el margen real (70%). Este es tu avance real de kilos hasta hoy, sin proyectar.</div>
       </div>
 
       <div class="breakdown">
         <div class="metric-card">
           <div class="metric-head">
-            <div class="metric-title">Cumplimiento de kilos</div>
+            <div class="metric-title">Cumplimiento de kilos (proyectado)</div>
             <div class="metric-weight" id="kg-weight">peso 30%</div>
           </div>
           <div class="metric-values">
@@ -736,7 +735,7 @@ function showResult(v){
   document.getElementById("mg-weight").textContent = "peso " + pctRound(v.pesoMg) + "%";
   var umbral = (STATE.config && STATE.config.umbral) || 0;
   document.getElementById("formula-note").textContent =
-    "Premio final = cumpl. kilos × " + pctRound(v.pesoKg) + "% + cumpl. margen × " + pctRound(v.pesoMg) +
+    "Premio final = cumpl. kilos proyectado × " + pctRound(v.pesoKg) + "% + cumpl. margen real × " + pctRound(v.pesoMg) +
     "% · tope " + pctRound(v.tope) + "%" + (umbral > 0 ? " · mínimo " + pctRound(umbral) + "% para cobrar" : "");
 
   var st = stateOf(v);
@@ -753,15 +752,14 @@ function showResult(v){
   document.getElementById("premio-maximo").textContent = fmtMoney(v.premioMaximo);
 
   var projCard = document.getElementById("proj-card");
-  if (v.kgProyectado !== null && v.kgProyectado !== undefined){
+  if (!v.pending){
     projCard.classList.remove("hidden");
-    document.getElementById("proj-kg").textContent = fmtKg(v.kgProyectado) + " kg";
-    document.getElementById("proj-premio").textContent = fmtMoney(v.premioAPagarProyectado) + " (" + pctLabel(v.premioFinalProyectado) + ")";
+    document.getElementById("proj-kg").textContent = fmtKg(v.kgReal) + " kg (" + pctLabel(v.cumplKgReal) + " del objetivo)";
   } else {
     projCard.classList.add("hidden");
   }
 
-  document.getElementById("kg-real").textContent = fmtKg(v.kgReal);
+  document.getElementById("kg-real").textContent = fmtKg(v.kgProyectado);
   document.getElementById("kg-target").textContent = fmtKg(v.kgTarget);
   document.getElementById("kg-pct").textContent = pctLabel(v.cumplKg);
   document.getElementById("kg-bar").style.width = Math.min(v.cumplKg*100,100) + "%";
@@ -806,8 +804,7 @@ function computeVendors(){
       kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplKgReal: cumplKgReal, cumplMg: cumplMg, tope: tope,
       objetivoPremio: t.objetivoPremio, premioMaximo: t.premioMaximo, premioAPagar: premioFinal*t.objetivoPremio,
       pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin,
-      kgProyectado: kgProyectado,
-      premioFinalProyectado: premioFinalProyectado, premioAPagarProyectado: premioAPagarProyectado
+      kgProyectado: kgProyectado
     });
   }
   return vendors;
