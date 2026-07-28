@@ -789,27 +789,33 @@ function computeVendors(){
     var kgReal = r ? r.kgReal : 0;
     var mgReal = r ? r.mgReal : 0;
 
-    // Kilos proyectado a fin de mes (real / día transcurrido × días del mes).
-    // Igual que en Comisiones.xlsx: el Cumpl. de Kilos OFICIAL (el que paga el premio)
-    // usa el kilo PROYECTADO, no el real a la fecha — el margen sí es el real.
-    var kgProyectado = (r && proy && proy.diaTranscurrido > 0) ? (kgReal / proy.diaTranscurrido) * proy.diasDelMes : kgReal;
-
+    // Premio OFICIAL: 30% Cumpl. Kilos real + 70% Cumpl. Margen real (siempre real, no proyectado).
     // Cumpl. Kilos y Cumpl. Margen NO tienen tope individual (=D/C, =G/F tal cual).
     // %Comisión = 0 si el ponderado < umbral (piso), si no MIN(tope, ponderado).
     // El tope efectivo sale de Premio Máximo / Objetivo (siempre 1.5x en el archivo actual).
-    var cumplKg = t.kgTarget > 0 ? kgProyectado/t.kgTarget : 0;
-    var cumplKgReal = t.kgTarget > 0 ? kgReal/t.kgTarget : 0;
+    var cumplKg = t.kgTarget > 0 ? kgReal/t.kgTarget : 0;
     var cumplMg = t.mgTarget > 0 ? mgReal/t.mgTarget : 0;
     var weighted = cumplKg*cfg.pesoKg + cumplMg*cfg.pesoMg;
     var tope = t.objetivoPremio > 0 ? t.premioMaximo/t.objetivoPremio : 1.5;
     var premioFinal = weighted < cfg.umbral ? 0 : Math.min(tope, weighted);
 
+    // Proyección a fin de mes (solo de referencia, tarjeta aparte): kilo proyectado por
+    // ritmo de venta (real / día transcurrido × días del mes) + margen real, mismo tope/piso.
+    var kgProyectado = null, cumplKgProyectado = null, premioFinalProyectado = null, premioAPagarProyectado = null;
+    if (r && proy && proy.diaTranscurrido > 0){
+      kgProyectado = (kgReal / proy.diaTranscurrido) * proy.diasDelMes;
+      cumplKgProyectado = t.kgTarget > 0 ? kgProyectado/t.kgTarget : 0;
+      var weightedProy = cumplKgProyectado*cfg.pesoKg + cumplMg*cfg.pesoMg;
+      premioFinalProyectado = weightedProy < cfg.umbral ? 0 : Math.min(tope, weightedProy);
+      premioAPagarProyectado = premioFinalProyectado * t.objetivoPremio;
+    }
+
     vendors.push({
       name: name, canal: t.canal, kgTarget: t.kgTarget, mgTarget: t.mgTarget,
-      kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplKgReal: cumplKgReal, cumplMg: cumplMg, tope: tope,
+      kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplMg: cumplMg, tope: tope,
       objetivoPremio: t.objetivoPremio, premioMaximo: t.premioMaximo, premioAPagar: premioFinal*t.objetivoPremio,
       pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin,
-      kgProyectado: kgProyectado,
+      kgProyectado: kgProyectado, cumplKgProyectado: cumplKgProyectado,
       premioFinalProyectado: premioFinalProyectado, premioAPagarProyectado: premioAPagarProyectado
     });
   }
