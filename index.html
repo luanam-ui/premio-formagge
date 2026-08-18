@@ -201,38 +201,25 @@ table.prev td.name{font-variant-numeric:normal}
 
       <div class="proj-card hidden" id="proj-card">
         <div class="proj-title">Proyección a fin de mes</div>
-        <div class="proj-row"><span>Kg proyectado</span><span id="proj-kg">0</span></div>
+        <div class="proj-row"><span>MACO proyectado</span><span id="proj-maco">$0</span></div>
         <div class="proj-row"><span>Premio proyectado</span><span id="proj-premio">$0</span></div>
-        <div class="proj-hint">Si seguís vendiendo a este ritmo el resto del mes, con el margen actual sin cambios.</div>
+        <div class="proj-hint">Si seguís generando MACO a este ritmo el resto del mes.</div>
       </div>
 
       <div class="breakdown">
         <div class="metric-card">
           <div class="metric-head">
-            <div class="metric-title">Cumplimiento de kilos</div>
-            <div class="metric-weight" id="kg-weight">peso 30%</div>
+            <div class="metric-title">Cumplimiento de MACO</div>
           </div>
           <div class="metric-values">
-            <div><span class="metric-real" id="kg-real">2.889</span> <span class="metric-target">de <span id="kg-target">16.000</span> kg</span></div>
-            <div class="metric-pct" id="kg-pct">18,1%</div>
+            <div><span class="metric-real" id="maco-real">$0</span> <span class="metric-target">de <span id="maco-target">$0</span></span></div>
+            <div class="metric-pct" id="maco-pct">0%</div>
           </div>
-          <div class="bar-track"><div class="bar-fill" id="kg-bar" style="background: var(--wine); width: 18.0571%;"></div></div>
-        </div>
-
-        <div class="metric-card">
-          <div class="metric-head">
-            <div class="metric-title">Cumplimiento de margen</div>
-            <div class="metric-weight" id="mg-weight">peso 70%</div>
-          </div>
-          <div class="metric-values">
-            <div><span class="metric-real" id="mg-real">24,5%</span> <span class="metric-target">de <span id="mg-target">24,3%</span></span></div>
-            <div class="metric-pct" id="mg-pct">100,9%</div>
-          </div>
-          <div class="bar-track"><div class="bar-fill" id="mg-bar" style="background: var(--olive); width: 100%;"></div></div>
+          <div class="bar-track"><div class="bar-fill" id="maco-bar" style="background: var(--wine); width: 0%;"></div></div>
         </div>
       </div>
 
-      <p class="note" id="formula-note">Premio final = cumpl. kilos × 30% + cumpl. margen × 70% · tope 150% · mínimo 80% para cobrar</p>
+      <p class="note" id="formula-note">Premio final = cumplimiento de MACO · tope 150% · mínimo 80% para cobrar</p>
 
       <div class="spacer"></div>
       <button class="btn ghost" id="btn-volver">Volver</button>
@@ -248,30 +235,30 @@ table.prev td.name{font-variant-numeric:normal}
       </div>
 
       <div class="admin-section">
-        <div class="admin-section-title">1. Objetivos del mes<span class="admin-section-sub">Julio 2026 Comisiones.xlsx</span></div>
-        <p class="admin-section-hint">Hoja "Cálculo Premio": Vendedor, Canal, Kg Target, MG Target, Objetivo $, Premio Máximo.</p>
+        <div class="admin-section-title">1. Objetivos del mes<span class="admin-section-sub">Cálculo Premio MACO.xlsx</span></div>
+        <p class="admin-section-hint">Hoja "Cálculo Premio MACO": Vendedor, Canal, MACO Objetivo, Objetivo $, Premio Máximo.</p>
         <label class="drop" id="drop-zone-targets" for="file-input-targets">
-          <div id="drop-label-targets">Julio 2026 Comisiones.xlsx</div>
+          <div id="drop-label-targets">Cálculo Premio MACO · Agosto 2026.xlsx</div>
           <input type="file" id="file-input-targets" accept=".xlsx,.csv" style="display:none">
         </label>
         <div id="targets-status"></div>
         <div id="targets-preview-wrap"></div>
         <button class="btn" id="btn-publicar-targets" style="margin-top:14px" disabled="">Guardar objetivos</button>
-        <div class="admin-meta" id="targets-meta">Última carga: 12/7/2026 06:35 p. m.</div>
+        <div class="admin-meta" id="targets-meta">Última carga: todavía no se cargó</div>
       </div>
 
       <div class="admin-section">
         <div class="admin-section-title">2. Avance real<span class="admin-section-sub">Reporte MACO x Cliente</span></div>
-        <p class="admin-section-hint">Hoja "Base": suma Kg y margen neto por vendedor (excluye remitos, muestras y precio ≤ 1).</p>
+        <p class="admin-section-hint">Hoja "Base": suma el margen neto (MACO) por vendedor (excluye remitos, muestras y precio ≤ 1).</p>
         <label class="drop" id="drop-zone-reales" for="file-input-reales">
-          <div id="drop-label-reales">Reporte MACO x CLIENTE 072026.xlsx</div>
+          <div id="drop-label-reales">Reporte MACO x CLIENTE 082026.xlsx</div>
           <input type="file" id="file-input-reales" accept=".xlsx,.csv" style="display:none">
         </label>
-        <div id="reales-status"><div class="status ok">Listo: avance real actualizado. No olvides descargar y subir la página al final (paso 3).</div></div>
-        <div id="reales-preview-wrap"><table class="prev"><thead><tr><th>Vendedor</th><th>Kg real</th><th>MG real</th></tr></thead><tbody><tr><td class="name">#N/A</td><td>9</td><td>58,8%</td></tr><tr><td class="name">Agustin Balate</td><td>1.048</td><td>43,7%</td></tr><tr><td class="name">Daniel Masulli</td><td>6.111</td><td>33,2%</td></tr><tr><td class="name">Distribuidores</td><td>1.355</td><td>25,1%</td></tr><tr><td class="name">Emiliano Montes</td><td>4.397</td><td>20,1%</td></tr><tr><td class="name">Ignacio Sancho</td><td>7.532</td><td>19,9%</td></tr><tr><td class="name">Ivo Lattuada</td><td>6.864</td><td>28,8%</td></tr><tr><td class="name">Javier Ochoteco</td><td>1.387</td><td>42,6%</td></tr><tr><td class="name">Joaquin Avagnale</td><td>24</td><td>34,3%</td></tr><tr><td class="name">Juan Tammaro</td><td>528</td><td>43,1%</td></tr><tr><td class="name">Manuela Pesaresi</td><td>12.364</td><td>23,9%</td></tr><tr><td class="name">Martin Fernandez</td><td>1.419</td><td>28,6%</td></tr><tr><td class="name">Oficina</td><td>20</td><td>19,1%</td></tr><tr><td class="name">Pedidos Web</td><td>45</td><td>50,1%</td></tr><tr><td class="name">Rodrigo Barria</td><td>2.811</td><td>32%</td></tr></tbody></table></div>
-        <div id="reales-warn"><div class="warn-list">Aviso: 4 nombre(s) del reporte de ventas no tienen objetivo cargado, no van a aparecer en la app (puede ser un error de nombre, o gente que no cobra premio individual): Joaquin Avagnale, #N/A, Oficina, Pedidos Web<div style="margin-top:10px"><button class="btn ghost" id="btn-warn-continuar" style="width:auto; padding:7px 16px">Continuar</button></div></div></div>
+        <div id="reales-status"></div>
+        <div id="reales-preview-wrap"></div>
+        <div id="reales-warn"></div>
         <button class="btn" id="btn-publicar-reales" style="margin-top:14px">Guardar avance real</button>
-        <div class="admin-meta" id="reales-meta">Última carga: 28/7/2026 12:57 p. m.</div>
+        <div class="admin-meta" id="reales-meta">Última carga: todavía no se cargó</div>
       </div>
 
       <div class="admin-section">
@@ -300,7 +287,7 @@ table.prev td.name{font-variant-numeric:normal}
 "use strict";
 
 var STORE_KEY = "premios_formagge_v1";
-/*__BAKED_STATE__*/var BAKED_STATE = {"period":"Julio 2026","targets":{"Ignacio Sancho":{"canal":"Mayoristas","kgTarget":11100,"mgTarget":0.17,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"7362"},"Manuela Pesaresi":{"canal":"Gastronomia","kgTarget":16000,"mgTarget":0.243,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"3693"},"Ivo Lattuada":{"canal":"Gastronomia","kgTarget":11700,"mgTarget":0.253,"objetivoPremio":646752,"premioMaximo":970128,"pin":"5708"},"Rodrigo Barria":{"canal":"Gastronomia","kgTarget":5000,"mgTarget":0.306,"objetivoPremio":368000,"premioMaximo":552000,"pin":"6977"},"Daniel Masulli":{"canal":"Gastronomia","kgTarget":7300,"mgTarget":0.329,"objetivoPremio":646752,"premioMaximo":970128,"pin":"6114"},"Javier Ochoteco":{"canal":"Tradicional","kgTarget":5600,"mgTarget":0.343,"objetivoPremio":800000,"premioMaximo":1200000,"pin":"6593"},"Juan Tammaro":{"canal":"Tradicional","kgTarget":1000,"mgTarget":0.34,"objetivoPremio":552000,"premioMaximo":828000,"pin":"1993"},"Agustin Balate":{"canal":"Tradicional","kgTarget":2400,"mgTarget":0.374,"objetivoPremio":320000,"premioMaximo":480000,"pin":"2672"},"Martin Fernandez":{"canal":"Supermercado","kgTarget":3500,"mgTarget":0.271,"objetivoPremio":240000,"premioMaximo":360000,"pin":"2524"},"Emiliano Montes":{"canal":"Supermercado","kgTarget":10800,"mgTarget":0.3,"objetivoPremio":0,"premioMaximo":0,"pin":"6994"},"Distribuidores":{"canal":"Distribuidores","kgTarget":2000,"mgTarget":0.278,"objetivoPremio":0,"premioMaximo":0,"pin":"2188"}},"config":{"pesoKg":0.3,"pesoMg":0.7,"umbral":0.8},"reales":{"Martin Fernandez":{"kgReal":2040.6800000000012,"mgReal":0.3028905460711454},"Ivo Lattuada":{"kgReal":9122.60000000001,"mgReal":0.27969771524314574},"Emiliano Montes":{"kgReal":9670.720000000018,"mgReal":0.29426772273267754},"Pedidos Web":{"kgReal":70.85000000000001,"mgReal":0.5586675123673792},"Daniel Masulli":{"kgReal":7198.270000000002,"mgReal":0.3375155673386595},"Agustin Balate":{"kgReal":2323.5500000000015,"mgReal":0.44282809087376274},"Manuela Pesaresi":{"kgReal":16159.870000000008,"mgReal":0.24188507393518857},"Javier Ochoteco":{"kgReal":2439.8100000000004,"mgReal":0.4329809414369656},"Juan Tammaro":{"kgReal":989.8700000000005,"mgReal":0.4503007669893871},"Ignacio Sancho":{"kgReal":9699.619999999999,"mgReal":0.2052921282942226},"Distribuidores":{"kgReal":1891.1900000000003,"mgReal":0.2755122929332664},"Oficina":{"kgReal":83.34,"mgReal":0.19636952544523475},"Rodrigo Barria":{"kgReal":3276.879999999999,"mgReal":0.3255987001531168},"Joaquin Avagnale":{"kgReal":34.35,"mgReal":0.42801400843692616}},"proyeccion":{"diaTranscurrido":31,"diasDelMes":31},"updatedAtTargets":"2026-08-04T13:30:59.526Z","updatedAtReal":"2026-08-04T13:30:59.526Z"};/*__END_BAKED_STATE__*/
+/*__BAKED_STATE__*/var BAKED_STATE = {"period":"Agosto 2026","targets":{"Manuela Pesaresi":{"canal":"Gastronomia","macoTarget":56151380.63,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"3693"},"Ivo Lattuada":{"canal":"Gastronomia","macoTarget":42173087.4,"objetivoPremio":646752,"premioMaximo":970128,"pin":"5708"},"Daniel Masulli":{"canal":"Gastronomia","macoTarget":44441521.39,"objetivoPremio":646752,"premioMaximo":970128,"pin":"6114"},"Juan Tammaro":{"canal":"Tradicional","macoTarget":27063745.87,"objetivoPremio":552000,"premioMaximo":828000,"pin":"1993"},"Javier Ochoteco":{"canal":"Tradicional","macoTarget":23947091.84,"objetivoPremio":800000,"premioMaximo":1200000,"pin":"6593"},"Ignacio Sancho":{"canal":"Mayorista","macoTarget":24267694.08,"objetivoPremio":736000,"premioMaximo":1104000,"pin":"7362"},"Martin Fernandez":{"canal":"Supermercado","macoTarget":12416539.35,"objetivoPremio":240000,"premioMaximo":360000,"pin":"2524"},"Emiliano Montes":{"canal":"Supermercado","macoTarget":58352624.69,"objetivoPremio":0,"premioMaximo":0,"pin":"6994"},"Distribuidores":{"canal":"Distribuidores","macoTarget":8643099.24524771,"objetivoPremio":0,"premioMaximo":0,"pin":"2188"}},"config":{"pesoKg":0.3,"pesoMg":0.7,"umbral":0.8},"reales":{"Ivo Lattuada":{"macoReal":21834304.30386541},"Daniel Masulli":{"macoReal":17377804.446632802},"Manuela Pesaresi":{"macoReal":22676832.33860658},"Emiliano Montes":{"macoReal":4231421.08010003},"Juan Tammaro":{"macoReal":8958808.188667735},"Martin Fernandez":{"macoReal":7101744.510307495},"Javier Ochoteco":{"macoReal":7798181.417989502},"Oficina":{"macoReal":153970.56650000002},"Pedidos web":{"macoReal":141163.48964999997},"Distribuidores":{"macoReal":3854160.4875500035},"Ignacio Sancho":{"macoReal":18507486.235850036},"Pedidos Web":{"macoReal":212103.48065000004},"Agustin Balate":{"macoReal":399686.0135}},"proyeccion":{"diaTranscurrido":17,"diasDelMes":31},"updatedAtTargets":"2026-08-18T15:36:18.771Z","updatedAtReal":"2026-08-18T15:36:18.771Z"};/*__END_BAKED_STATE__*/
 var STATE = BAKED_STATE || { period:"", targets:{}, reales:{}, config:{ pesoKg:0.30, pesoMg:0.70, umbral:0 }, updatedAtTargets:null, updatedAtReal:null };
 STATE.config = STATE.config || { pesoKg:0.30, pesoMg:0.70, umbral:0 };
 var pendingTargets = null;
@@ -544,12 +531,12 @@ function generatePin(name){
   return String(hash % 10000).padStart(4, "0");
 }
 
-// ---- extractor 1: objetivos del mes (Comisiones.xlsx, hoja Cálculo Premio) ----
+// ---- extractor 1: objetivos del mes (Cálculo Premio MACO.xlsx) ----
 function extractTargets(grid){
   var headerRowIdx = -1, cols = {};
   for (var r=0; r<grid.length; r++){
     var row = grid[r] || [];
-    var found = { vendedor:-1, canal:-1, kgTarget:-1, mgTarget:-1, objetivoPremio:-1, premioMaximo:-1 };
+    var found = { vendedor:-1, canal:-1, macoTarget:-1, objetivoPremio:-1, premioMaximo:-1 };
     for (var c=0; c<row.length; c++){
       var h = normHeader(row[c]);
       if (!h) continue;
@@ -557,20 +544,13 @@ function extractTargets(grid){
       if (found.canal === -1 && h === "canal"){ found.canal = c; continue; }
       if (found.objetivoPremio === -1 && h === "objetivo"){ found.objetivoPremio = c; continue; }
       if (found.premioMaximo === -1 && h.indexOf("premio") !== -1 && h.indexOf("maximo") !== -1){ found.premioMaximo = c; continue; }
-      var isKg = h.indexOf("kg") !== -1 || h.indexOf("kilos") !== -1;
-      var isMg = h.indexOf("mg") !== -1 || h.indexOf("margen") !== -1;
-      var isCumpl = h.indexOf("cumpl") !== -1;
-      var isTarget = h.indexOf("target") !== -1 || h.indexOf("objetivo") !== -1;
-      var isExcluded = h.indexOf("comision") !== -1 || h.indexOf("premio") !== -1;
-      if (isCumpl || isExcluded) continue;
-      if (found.kgTarget === -1 && isKg && isTarget){ found.kgTarget = c; continue; }
-      if (found.mgTarget === -1 && isMg && isTarget){ found.mgTarget = c; continue; }
+      if (found.macoTarget === -1 && h.indexOf("maco") !== -1 && h.indexOf("objetivo") !== -1){ found.macoTarget = c; continue; }
     }
-    if (found.vendedor !== -1 && found.kgTarget !== -1 && found.mgTarget !== -1){
+    if (found.vendedor !== -1 && found.macoTarget !== -1){
       headerRowIdx = r; cols = found; break;
     }
   }
-  if (headerRowIdx === -1) return { error: "No se encontraron las columnas esperadas (Vendedor, Kg Target, MG Target). Revisá los encabezados del archivo." };
+  if (headerRowIdx === -1) return { error: "No se encontraron las columnas esperadas (Vendedor, MACO Objetivo). Revisá los encabezados del archivo." };
 
   var targets = {};
   var order = [];
@@ -579,12 +559,11 @@ function extractTargets(grid){
     var name = String(row[cols.vendedor]||"").trim();
     if (!name) break;
     if (normHeader(name) === "total") break;
-    var kgTarget = parseEsNumber(row[cols.kgTarget]);
-    var mgTarget = parseEsPercentValue(row[cols.mgTarget]);
+    var macoTarget = parseEsNumber(row[cols.macoTarget]);
     var canal = cols.canal !== -1 ? String(row[cols.canal]||"").trim() : "";
     var objetivoPremio = cols.objetivoPremio !== -1 ? parseEsNumber(row[cols.objetivoPremio]) : 0;
     var premioMaximo = cols.premioMaximo !== -1 ? parseEsNumber(row[cols.premioMaximo]) : 0;
-    targets[name] = { canal:canal, kgTarget:kgTarget, mgTarget:mgTarget, objetivoPremio:objetivoPremio, premioMaximo:premioMaximo, pin:generatePin(name) };
+    targets[name] = { canal:canal, macoTarget:macoTarget, objetivoPremio:objetivoPremio, premioMaximo:premioMaximo, pin:generatePin(name) };
     order.push(name);
   }
   if (!order.length) return { error: "El archivo no tiene filas de vendedores debajo del encabezado." };
@@ -592,11 +571,12 @@ function extractTargets(grid){
 }
 
 // ---- extractor 2: avance real (Reporte MACO x Cliente, hoja Base) ----
+// MACO real = Importe Neto - Costo Neto (margen bruto en $), sumado por vendedor.
 function extractReales(grid){
   var headerRowIdx = -1, cols = {};
   for (var r=0; r<grid.length; r++){
     var row = grid[r] || [];
-    var found = { vendedor:-1, tipo:-1, categoria:-1, precio:-1, peso:-1, impNeto:-1, costoNeto:-1 };
+    var found = { vendedor:-1, tipo:-1, categoria:-1, precio:-1, impNeto:-1, costoNeto:-1 };
     for (var c=0; c<row.length; c++){
       var h = normHeader(row[c]);
       if (!h) continue;
@@ -604,16 +584,15 @@ function extractReales(grid){
       if (found.tipo === -1 && h.indexOf("tipo") !== -1 && h.indexOf("comprobante") !== -1){ found.tipo = c; continue; }
       if (found.categoria === -1 && h.indexOf("categoria") !== -1){ found.categoria = c; continue; }
       if (found.precio === -1 && h.indexOf("precio") !== -1 && h.indexOf("iva") === -1){ found.precio = c; continue; }
-      if (found.peso === -1 && h.indexOf("peso") !== -1 && h.indexOf("unitario") === -1){ found.peso = c; continue; }
       if (found.impNeto === -1 && h.indexOf("importe") !== -1 && h.indexOf("neto") !== -1){ found.impNeto = c; continue; }
       if (found.costoNeto === -1 && h.indexOf("costo") !== -1 && h.indexOf("neto") !== -1){ found.costoNeto = c; continue; }
     }
     var allFound = found.vendedor !== -1 && found.tipo !== -1 && found.categoria !== -1 && found.precio !== -1 &&
-      found.peso !== -1 && found.impNeto !== -1 && found.costoNeto !== -1;
+      found.impNeto !== -1 && found.costoNeto !== -1;
     if (allFound){ headerRowIdx = r; cols = found; break; }
   }
   if (headerRowIdx === -1){
-    return { error: "No se encontraron las columnas esperadas del Reporte MACO x Cliente (VENDEDOR OK, Tipo de comprobante, categoria, precio, peso, Importe NETO, Costo total NETO) en la hoja Base." };
+    return { error: "No se encontraron las columnas esperadas del Reporte MACO x Cliente (VENDEDOR OK, Tipo de comprobante, categoria, precio, Importe NETO, Costo total NETO) en la hoja Base." };
   }
 
   var acc = {};
@@ -621,7 +600,7 @@ function extractReales(grid){
   for (var i=headerRowIdx+1; i<grid.length; i++){
     var row = grid[i];
     if (!row) continue;
-    var hasAny = row[cols.impNeto] !== undefined || row[cols.peso] !== undefined;
+    var hasAny = row[cols.impNeto] !== undefined;
     if (!hasAny) continue;
     stats.total++;
 
@@ -637,12 +616,10 @@ function extractReales(grid){
     var name = String(row[cols.vendedor]||"").trim();
     if (!name){ stats.sinVendedor++; continue; }
 
-    var peso = parseEsNumber(row[cols.peso]);
     var imp = parseEsNumber(row[cols.impNeto]);
     var cos = parseEsNumber(row[cols.costoNeto]);
 
-    if (!acc[name]) acc[name] = { kg:0, imp:0, cos:0 };
-    acc[name].kg += peso;
+    if (!acc[name]) acc[name] = { imp:0, cos:0 };
     acc[name].imp += imp;
     acc[name].cos += cos;
     stats.validas++;
@@ -651,7 +628,7 @@ function extractReales(grid){
   var reales = {};
   for (var vend in acc){
     var a = acc[vend];
-    reales[vend] = { kgReal: a.kg, mgReal: a.imp > 0 ? (a.imp - a.cos) / a.imp : 0 };
+    reales[vend] = { macoReal: a.imp - a.cos };
   }
   if (!Object.keys(reales).length) return { error: "No se encontraron líneas de venta válidas en la hoja Base." };
   return { reales: reales, stats: stats };
@@ -735,12 +712,10 @@ function showResult(v){
   document.getElementById("res-canal").textContent = v.canal || "";
   document.getElementById("res-period").textContent = STATE.period ? "Período: " + STATE.period : "";
 
-  document.getElementById("kg-weight").textContent = "peso " + pctRound(v.pesoKg) + "%";
-  document.getElementById("mg-weight").textContent = "peso " + pctRound(v.pesoMg) + "%";
   var umbral = (STATE.config && STATE.config.umbral) || 0;
   document.getElementById("formula-note").textContent =
-    "Premio final = cumpl. kilos × " + pctRound(v.pesoKg) + "% + cumpl. margen × " + pctRound(v.pesoMg) +
-    "% · tope " + pctRound(v.tope) + "%" + (umbral > 0 ? " · mínimo " + pctRound(umbral) + "% para cobrar" : "");
+    "Premio final = cumplimiento de MACO · tope " + pctRound(v.tope) + "%" +
+    (umbral > 0 ? " · mínimo " + pctRound(umbral) + "% para cobrar" : "");
 
   var st = stateOf(v);
   document.getElementById("gauge-num").textContent = pctLabel(v.premioFinal);
@@ -756,66 +731,55 @@ function showResult(v){
   document.getElementById("premio-maximo").textContent = fmtMoney(v.premioMaximo);
 
   var projCard = document.getElementById("proj-card");
-  if (v.kgProyectado !== null && v.kgProyectado !== undefined){
+  if (v.macoProyectado !== null && v.macoProyectado !== undefined){
     projCard.classList.remove("hidden");
-    document.getElementById("proj-kg").textContent = fmtKg(v.kgProyectado) + " kg";
+    document.getElementById("proj-maco").textContent = fmtMoney(v.macoProyectado);
     document.getElementById("proj-premio").textContent = fmtMoney(v.premioAPagarProyectado) + " (" + pctLabel(v.premioFinalProyectado) + ")";
   } else {
     projCard.classList.add("hidden");
   }
 
-  document.getElementById("kg-real").textContent = fmtKg(v.kgReal);
-  document.getElementById("kg-target").textContent = fmtKg(v.kgTarget);
-  document.getElementById("kg-pct").textContent = pctLabel(v.cumplKg);
-  document.getElementById("kg-bar").style.width = Math.min(v.cumplKg*100,100) + "%";
-  document.getElementById("kg-bar").style.background = v.cumplKg >= 1 ? "var(--olive)" : (v.cumplKg >= 0.8 ? "#8C6A1A" : "var(--wine)");
-
-  document.getElementById("mg-real").textContent = pctLabel(v.mgReal);
-  document.getElementById("mg-target").textContent = pctLabel(v.mgTarget);
-  document.getElementById("mg-pct").textContent = pctLabel(v.cumplMg);
-  document.getElementById("mg-bar").style.width = Math.min(v.cumplMg*100,100) + "%";
-  document.getElementById("mg-bar").style.background = v.cumplMg >= 1 ? "var(--olive)" : (v.cumplMg >= 0.8 ? "#8C6A1A" : "var(--wine)");
+  document.getElementById("maco-real").textContent = fmtMoney(v.macoReal);
+  document.getElementById("maco-target").textContent = fmtMoney(v.macoTarget);
+  document.getElementById("maco-pct").textContent = pctLabel(v.cumplMaco);
+  document.getElementById("maco-bar").style.width = Math.min(v.cumplMaco*100,100) + "%";
+  document.getElementById("maco-bar").style.background = v.cumplMaco >= 1 ? "var(--olive)" : (v.cumplMaco >= 0.8 ? "#8C6A1A" : "var(--wine)");
 
   goTo("view-result");
 }
 
 function computeVendors(){
-  var cfg = STATE.config || { pesoKg: 0.30, pesoMg: 0.70, umbral: 0 };
+  var cfg = STATE.config || { umbral: 0 };
   var proy = STATE.proyeccion;
   var vendors = [];
   for (var name in STATE.targets){
     var t = STATE.targets[name];
     var r = STATE.reales[name];
-    var kgReal = r ? r.kgReal : 0;
-    var mgReal = r ? r.mgReal : 0;
+    var macoReal = r ? r.macoReal : 0;
 
-    // Premio OFICIAL: 30% Cumpl. Kilos real + 70% Cumpl. Margen real (siempre real, no proyectado).
-    // Cumpl. Kilos y Cumpl. Margen NO tienen tope individual (=D/C, =G/F tal cual).
-    // %Comisión = 0 si el ponderado < umbral (piso), si no MIN(tope, ponderado).
+    // Premio OFICIAL: MACO real / MACO objetivo (única métrica, sin blend de kilos/margen).
+    // %Comisión = 0 si el cumplimiento < umbral (piso), si no MIN(tope, cumplimiento).
     // El tope efectivo sale de Premio Máximo / Objetivo (siempre 1.5x en el archivo actual).
-    var cumplKg = t.kgTarget > 0 ? kgReal/t.kgTarget : 0;
-    var cumplMg = t.mgTarget > 0 ? mgReal/t.mgTarget : 0;
-    var weighted = cumplKg*cfg.pesoKg + cumplMg*cfg.pesoMg;
+    var cumplMaco = t.macoTarget > 0 ? macoReal/t.macoTarget : 0;
     var tope = t.objetivoPremio > 0 ? t.premioMaximo/t.objetivoPremio : 1.5;
-    var premioFinal = weighted < cfg.umbral ? 0 : Math.min(tope, weighted);
+    var premioFinal = cumplMaco < cfg.umbral ? 0 : Math.min(tope, cumplMaco);
 
-    // Proyección a fin de mes (solo de referencia, tarjeta aparte): kilo proyectado por
-    // ritmo de venta (real / día transcurrido × días del mes) + margen real, mismo tope/piso.
-    var kgProyectado = null, cumplKgProyectado = null, premioFinalProyectado = null, premioAPagarProyectado = null;
+    // Proyección a fin de mes (solo de referencia, tarjeta aparte): MACO proyectado por
+    // ritmo de generación (real / día transcurrido × días del mes), mismo tope/piso.
+    var macoProyectado = null, cumplMacoProyectado = null, premioFinalProyectado = null, premioAPagarProyectado = null;
     if (r && proy && proy.diaTranscurrido > 0){
-      kgProyectado = (kgReal / proy.diaTranscurrido) * proy.diasDelMes;
-      cumplKgProyectado = t.kgTarget > 0 ? kgProyectado/t.kgTarget : 0;
-      var weightedProy = cumplKgProyectado*cfg.pesoKg + cumplMg*cfg.pesoMg;
-      premioFinalProyectado = weightedProy < cfg.umbral ? 0 : Math.min(tope, weightedProy);
+      macoProyectado = (macoReal / proy.diaTranscurrido) * proy.diasDelMes;
+      cumplMacoProyectado = t.macoTarget > 0 ? macoProyectado/t.macoTarget : 0;
+      premioFinalProyectado = cumplMacoProyectado < cfg.umbral ? 0 : Math.min(tope, cumplMacoProyectado);
       premioAPagarProyectado = premioFinalProyectado * t.objetivoPremio;
     }
 
     vendors.push({
-      name: name, canal: t.canal, kgTarget: t.kgTarget, mgTarget: t.mgTarget,
-      kgReal: kgReal, mgReal: mgReal, cumplKg: cumplKg, cumplMg: cumplMg, tope: tope,
+      name: name, canal: t.canal, macoTarget: t.macoTarget,
+      macoReal: macoReal, cumplMaco: cumplMaco, tope: tope,
       objetivoPremio: t.objetivoPremio, premioMaximo: t.premioMaximo, premioAPagar: premioFinal*t.objetivoPremio,
-      pesoKg: cfg.pesoKg, pesoMg: cfg.pesoMg, premioFinal: premioFinal, pending: !r, pin: t.pin,
-      kgProyectado: kgProyectado, cumplKgProyectado: cumplKgProyectado,
+      premioFinal: premioFinal, pending: !r, pin: t.pin,
+      macoProyectado: macoProyectado, cumplMacoProyectado: cumplMacoProyectado,
       premioFinalProyectado: premioFinalProyectado, premioAPagarProyectado: premioAPagarProyectado
     });
   }
@@ -886,9 +850,9 @@ function renderTargetsPreview(targets, order){
   var wrap = document.getElementById("targets-preview-wrap");
   var rows = order.map(function(name){
     var t = targets[name];
-    return "<tr><td class='name'>"+name+"</td><td>"+(t.canal||"—")+"</td><td>"+fmtKg(t.kgTarget)+"</td><td>"+pctLabel(t.mgTarget)+"</td><td>"+t.pin+"</td></tr>";
+    return "<tr><td class='name'>"+name+"</td><td>"+(t.canal||"—")+"</td><td>"+fmtMoney(t.macoTarget)+"</td><td>"+t.pin+"</td></tr>";
   }).join("");
-  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>Canal</th><th>Kg target</th><th>MG target</th><th>PIN</th></tr></thead><tbody>"+rows+"</tbody></table>" +
+  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>Canal</th><th>MACO target</th><th>PIN</th></tr></thead><tbody>"+rows+"</tbody></table>" +
     "<div class='admin-meta'>Repartí el PIN de cada uno por WhatsApp o el medio que uses — es el mismo todos los meses mientras no le cambies el nombre.</div>";
 }
 
@@ -897,9 +861,9 @@ function renderRealesPreview(reales){
   var names = Object.keys(reales).sort(function(a,b){ return a.localeCompare(b,"es"); });
   var rows = names.map(function(name){
     var r = reales[name];
-    return "<tr><td class='name'>"+name+"</td><td>"+fmtKg(r.kgReal)+"</td><td>"+pctLabel(r.mgReal)+"</td></tr>";
+    return "<tr><td class='name'>"+name+"</td><td>"+fmtMoney(r.macoReal)+"</td></tr>";
   }).join("");
-  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>Kg real</th><th>MG real</th></tr></thead><tbody>"+rows+"</tbody></table>";
+  wrap.innerHTML = "<table class='prev'><thead><tr><th>Vendedor</th><th>MACO real</th></tr></thead><tbody>"+rows+"</tbody></table>";
 }
 
 function setStatus(elId, kind, msg){
