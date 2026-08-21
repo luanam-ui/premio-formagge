@@ -1,0 +1,30 @@
+name: Avisar a vendedores por email
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+  workflow_dispatch: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar nodemailer
+        run: npm install nodemailer@6
+
+      - name: Enviar avisos
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          VENDOR_EMAILS_JSON: ${{ secrets.VENDOR_EMAILS_JSON }}
+        run: node .github/scripts/notify-vendors.js
